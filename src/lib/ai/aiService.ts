@@ -17,6 +17,11 @@ interface GenerateOptions {
     systemPrompt: string;
     provider: "openai" | "google" | "anthropic";
     settings: AISettings;
+    context?: {
+        summary?: string;
+        skills?: string;
+        custom?: string;
+    };
 }
 
 export async function generateContent({
@@ -24,17 +29,31 @@ export async function generateContent({
     systemPrompt,
     provider,
     settings,
+    context,
 }: GenerateOptions): Promise<string> {
+    // Append context to system prompt if provided
+    let finalSystemPrompt = systemPrompt;
+    if (context) {
+        const contextParts = [];
+        if (context.summary) contextParts.push(`USER PROFESSIONAL SUMMARY:\n"${context.summary}"`);
+        if (context.skills) contextParts.push(`USER TECHNICAL SKILLS:\n"${context.skills}"`);
+        if (context.custom) contextParts.push(`CUSTOM INSTRUCTIONS:\n"${context.custom}"`);
+
+        if (contextParts.length > 0) {
+            finalSystemPrompt += `\n\nADDITIONAL CONTEXT & INSTRUCTIONS:\n${contextParts.join("\n\n")}\n\nUse this context to personalize the output.`;
+        }
+    }
+
     // Use selected model or fallback to default for that provider
     const model = settings.selectedModel || DEFAULT_MODELS[provider];
 
     switch (provider) {
         case "openai":
-            return generateOpenAI(prompt, systemPrompt, settings.openaiKey, model);
+            return generateOpenAI(prompt, finalSystemPrompt, settings.openaiKey, model);
         case "google":
-            return generateGoogle(prompt, systemPrompt, settings.googleKey, model);
+            return generateGoogle(prompt, finalSystemPrompt, settings.googleKey, model);
         case "anthropic":
-            return generateAnthropic(prompt, systemPrompt, settings.anthropicKey, model);
+            return generateAnthropic(prompt, finalSystemPrompt, settings.anthropicKey, model);
         default:
             throw new Error("Invalid provider");
     }

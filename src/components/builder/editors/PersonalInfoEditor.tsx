@@ -19,10 +19,13 @@ import {
 } from "@/components/ui/dialog";
 import { toast } from "sonner";
 
+import { useUserProfileStore } from "@/lib/store/useUserProfileStore";
+
 export function PersonalInfoEditor() {
   const { resumeData, updatePersonalInfo } = useResumeStore();
   const { personalInfo } = resumeData;
   const settings = useAISettingsStore();
+  const { context } = useUserProfileStore();
 
   const [isGenerating, setIsGenerating] = useState(false);
   const [summaryOptions, setSummaryOptions] = useState<string[]>([]);
@@ -49,7 +52,7 @@ export function PersonalInfoEditor() {
       const promptData = {
         jobTitle: resumeData.experience[0]?.title || "Professional",
         experience: resumeData.experience
-          .map((e) => `${e.title} at ${e.company}: ${e.description}`)
+          .map((e) => `${e.title} at ${e.company}: ${e.highlights.join(". ")}`)
           .join("\n"),
         skills: resumeData.skills.map((s) => s.name).join(", "),
       };
@@ -59,6 +62,7 @@ export function PersonalInfoEditor() {
       const response = await generateContent({
         provider,
         settings,
+        context, // Pass global context
         prompt,
         systemPrompt: SUMMARY_PROMPT.replace("{jobTitle}", promptData.jobTitle)
           .replace("{experience}", promptData.experience)
@@ -85,9 +89,35 @@ export function PersonalInfoEditor() {
     setShowOptions(false);
   };
 
+  const handleLoadFromProfile = () => {
+    const { profile } = useUserProfileStore.getState();
+    if (Object.keys(profile).length === 0) {
+      toast.error("No profile defaults found in Settings.");
+      return;
+    }
+
+    // Update all fields that exist in profile
+    Object.entries(profile).forEach(([key, value]) => {
+      if (value) {
+        updatePersonalInfo(key as any, value);
+      }
+    });
+    toast.success("Loaded personal info from settings");
+  };
+
   return (
     <div className="space-y-4">
-      <h3 className="font-medium">Personal Information</h3>
+      <div className="flex items-center justify-between">
+        <h3 className="font-medium">Personal Information</h3>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={handleLoadFromProfile}
+          className="text-xs h-8"
+        >
+          Load from Profile
+        </Button>
+      </div>
       <div className="space-y-3">
         {/* ... existing fields ... */}
         <div className="space-y-1.5">

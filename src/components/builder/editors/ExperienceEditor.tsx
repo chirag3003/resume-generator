@@ -49,6 +49,8 @@ import {
 } from "@/components/ui/dialog";
 import { toast } from "sonner";
 
+import { type Experience } from "@/lib/schema/resume";
+
 interface SortableExperienceItemProps {
   exp: {
     id: string;
@@ -59,7 +61,7 @@ interface SortableExperienceItemProps {
     endDate?: string;
     highlights: string[];
   };
-  updateExperience: (id: string, data: Partial<any>) => void;
+  updateExperience: (id: string, data: Partial<Experience>) => void;
   removeExperience: (id: string) => void;
   handleAddHighlight: (id: string) => void;
   handleUpdateHighlight: (id: string, idx: number, value: string) => void;
@@ -249,6 +251,10 @@ function SortableExperienceItem({
   );
 }
 
+import { useUserProfileStore } from "@/lib/store/useUserProfileStore";
+
+// ... imports ...
+
 export function ExperienceEditor() {
   const {
     resumeData,
@@ -259,11 +265,13 @@ export function ExperienceEditor() {
   } = useResumeStore();
   const { experience } = resumeData;
   const settings = useAISettingsStore();
+  const { context: globalContext } = useUserProfileStore();
 
   const [enhancingId, setEnhancingId] = useState<{
     id: string;
     idx: number;
   } | null>(null);
+
   const [enhancementOptions, setEnhancementOptions] = useState<string[]>([]);
   const [showOptions, setShowOptions] = useState(false);
 
@@ -348,6 +356,7 @@ export function ExperienceEditor() {
       const response = await generateContent({
         provider,
         settings,
+        context: globalContext, // Pass global context
         prompt,
         systemPrompt: BULLET_ENHANCER_PROMPT.replace(
           "{originalText}",

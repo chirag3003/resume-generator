@@ -232,6 +232,14 @@ export default function DashboardPage() {
                 <FileText className="h-6 w-6 text-primary" />
                 <span className="font-bold text-xl">ResumeBuilder</span>
               </Link>
+              <nav className="hidden md:flex items-center gap-4 ml-6">
+                <Link
+                  href="/settings"
+                  className="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors"
+                >
+                  Settings
+                </Link>
+              </nav>
             </div>
           </div>
         </div>
