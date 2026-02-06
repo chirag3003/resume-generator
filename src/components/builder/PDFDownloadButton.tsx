@@ -28,25 +28,28 @@ export function PDFDownloadButton({ data }: PDFDownloadButtonProps) {
       let PdfComponent: React.ComponentType<{ data: ResumeData }>;
 
       switch (activeTemplate) {
-        case "modern":
+        case "modern": {
           const { ModernPDFDocument } = await import(
             "@/components/pdf/ModernPDFDocument"
           );
           PdfComponent = ModernPDFDocument;
           break;
-        case "minimal":
+        }
+        case "minimal": {
           const { MinimalPDFDocument } = await import(
             "@/components/pdf/MinimalPDFDocument"
           );
           PdfComponent = MinimalPDFDocument;
           break;
+        }
         case "classic":
-        default:
+        default: {
           const { ResumePDFDocument } = await import(
             "@/components/pdf/ResumePDFDocument"
           );
           PdfComponent = ResumePDFDocument;
           break;
+        }
       }
 
       const blob = await pdf(<PdfComponent data={data} />).toBlob();

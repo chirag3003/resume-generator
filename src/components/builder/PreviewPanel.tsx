@@ -91,23 +91,25 @@ export function PreviewPanel({ data }: PreviewPanelProps) {
       className="h-full w-full bg-zinc-100 dark:bg-zinc-900 flex flex-col overflow-hidden"
     >
       {/* Controls */}
-      <div className="flex items-center justify-between p-3 bg-background/80 backdrop-blur border-b shrink-0">
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center justify-between gap-2 p-2 sm:p-3 bg-background/80 backdrop-blur border-b shrink-0">
+        <div className="flex items-center gap-2 sm:gap-4 flex-wrap">
+          <div className="flex items-center gap-1 sm:gap-2">
             <Button
               variant="outline"
               size="icon"
+              className="h-8 w-8 sm:h-9 sm:w-9"
               onClick={handleZoomOut}
               disabled={scale <= 0.3}
             >
               <ZoomOut className="h-4 w-4" />
             </Button>
-            <span className="text-sm font-medium w-14 text-center">
+            <span className="text-xs sm:text-sm font-medium w-12 text-center">
               {zoomPercentage}%
             </span>
             <Button
               variant="outline"
               size="icon"
+              className="h-8 w-8 sm:h-9 sm:w-9"
               onClick={handleZoomIn}
               disabled={scale >= 1.5}
             >
@@ -116,6 +118,7 @@ export function PreviewPanel({ data }: PreviewPanelProps) {
             <Button
               variant="ghost"
               size="icon"
+              className="h-8 w-8 sm:h-9 sm:w-9 hidden sm:flex"
               onClick={handleReset}
               title="Reset zoom"
             >
@@ -123,14 +126,21 @@ export function PreviewPanel({ data }: PreviewPanelProps) {
             </Button>
           </div>
 
-          <TemplateSelector />
+          <div className="hidden sm:block">
+            <TemplateSelector />
+          </div>
         </div>
 
         <PDFDownloadButton data={data} />
       </div>
 
+      {/* Mobile template selector */}
+      <div className="sm:hidden flex justify-center p-2 bg-background/50 border-b">
+        <TemplateSelector />
+      </div>
+
       {/* Preview area */}
-      <div className="flex-1 overflow-auto flex items-start justify-center p-6">
+      <div className="flex-1 overflow-auto flex items-start justify-center p-3 sm:p-6">
         <div
           className="shadow-2xl origin-top"
           style={{
