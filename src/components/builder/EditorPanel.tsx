@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { AISettingsDialog } from "./AISettingsDialog";
 import {
   EducationEditor,
   ExperienceEditor,
@@ -16,7 +17,6 @@ import {
   ProjectsEditor,
   SkillsEditor,
 } from "./editors";
-import { AISettingsDialog } from "./AISettingsDialog";
 
 export function EditorPanel() {
   return (

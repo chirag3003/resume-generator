@@ -1,15 +1,15 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import {
-  FileText,
-  Sparkles,
-  Download,
-  Palette,
-  Shield,
-  Zap,
   ArrowRight,
   CheckCircle2,
+  Download,
+  FileText,
+  Palette,
+  Shield,
+  Sparkles,
+  Zap,
 } from "lucide-react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (

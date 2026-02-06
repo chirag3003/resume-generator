@@ -1,6 +1,6 @@
 "use client";
 
-import { useResumeStore } from "@/lib/store/useResumeStore";
+import { FileText } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { FileText } from "lucide-react";
+import { useResumeStore } from "@/lib/store/useResumeStore";
 
 const templates = [
   {

@@ -1,4 +1,7 @@
+import { Settings2, Sparkles } from "lucide-react";
 import { useState } from "react";
+import { AISettingsForm } from "@/components/settings/AISettingsForm";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -7,9 +10,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Settings2, Sparkles } from "lucide-react";
-import { AISettingsForm } from "@/components/settings/AISettingsForm";
 
 export function AISettingsDialog() {
   const [open, setOpen] = useState(false);

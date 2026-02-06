@@ -1,6 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { Check } from "lucide-react";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,13 +13,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Check } from "lucide-react";
-import {
-  useAISettingsStore,
-  type AIProvider,
-} from "@/lib/store/useAISettingsStore";
 import { DEFAULT_MODELS } from "@/lib/ai/aiService";
-import { toast } from "sonner";
+import {
+  type AIProvider,
+  useAISettingsStore,
+} from "@/lib/store/useAISettingsStore";
 
 interface AISettingsFormProps {
   onSave?: () => void;

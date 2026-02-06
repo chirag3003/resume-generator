@@ -1,13 +1,13 @@
 "use client";
 
-import { useRef, useEffect, useState, useCallback } from "react";
+import { RotateCcw, ZoomIn, ZoomOut } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { ClassicATSTemplate } from "@/components/templates/ClassicATSTemplate";
+import { MinimalTemplate } from "@/components/templates/MinimalTemplate";
+import { ModernTemplate } from "@/components/templates/ModernTemplate";
+import { Button } from "@/components/ui/button";
 import type { ResumeData } from "@/lib/schema";
 import { useResumeStore } from "@/lib/store/useResumeStore";
-import { ClassicATSTemplate } from "@/components/templates/ClassicATSTemplate";
-import { ModernTemplate } from "@/components/templates/ModernTemplate";
-import { MinimalTemplate } from "@/components/templates/MinimalTemplate";
-import { Button } from "@/components/ui/button";
-import { ZoomIn, ZoomOut, RotateCcw } from "lucide-react";
 import { PDFDownloadButton } from "./PDFDownloadButton";
 import { TemplateSelector } from "./TemplateSelector";
 
@@ -79,7 +79,6 @@ export function PreviewPanel({ data }: PreviewPanelProps) {
         return <ModernTemplate data={data} />;
       case "minimal":
         return <MinimalTemplate data={data} />;
-      case "classic":
       default:
         return <ClassicATSTemplate data={data} />;
     }

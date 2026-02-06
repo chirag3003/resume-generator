@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
 import { Download, Loader2 } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
 import type { ResumeData } from "@/lib/schema";
 import { useResumeStore } from "@/lib/store/useResumeStore";
 
@@ -42,7 +42,6 @@ export function PDFDownloadButton({ data }: PDFDownloadButtonProps) {
           PdfComponent = MinimalPDFDocument;
           break;
         }
-        case "classic":
         default: {
           const { ResumePDFDocument } = await import(
             "@/components/pdf/ResumePDFDocument"

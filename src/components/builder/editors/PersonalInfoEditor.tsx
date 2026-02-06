@@ -101,7 +101,6 @@ export function PersonalInfoEditor() {
     // Update all fields that exist in profile
     Object.entries(profile).forEach(([key, value]) => {
       if (value) {
-        // biome-ignore lint/suspicious/noExplicitAny: <it works>
         updatePersonalInfo(key as any, value);
       }
     });

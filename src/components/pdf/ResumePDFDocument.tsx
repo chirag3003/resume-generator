@@ -2,11 +2,11 @@
 
 import {
   Document,
+  Link,
   Page,
+  StyleSheet,
   Text,
   View,
-  StyleSheet,
-  Link,
 } from "@react-pdf/renderer";
 import type { ResumeData } from "@/lib/schema";
 

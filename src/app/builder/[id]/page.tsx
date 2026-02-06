@@ -1,14 +1,14 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { ArrowLeft, Eye, FileText, Loader2, PenSquare } from "lucide-react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import { EditorPanel } from "@/components/builder/EditorPanel";
 import { PreviewPanel } from "@/components/builder/PreviewPanel";
-import { useResumeStore } from "@/lib/store/useResumeStore";
-import { useDashboardStore } from "@/lib/store/useDashboardStore";
 import { Button } from "@/components/ui/button";
-import { PenSquare, Eye, ArrowLeft, FileText, Loader2 } from "lucide-react";
+import { useDashboardStore } from "@/lib/store/useDashboardStore";
+import { useResumeStore } from "@/lib/store/useResumeStore";
 
 export default function BuilderPage() {
   const router = useRouter();

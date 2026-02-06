@@ -1,17 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { ArrowLeft, FileText, Save, Settings2, User } from "lucide-react";
 import Link from "next/link";
-import { ArrowLeft, FileText, User, Settings2, Save } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useUserProfileStore } from "@/lib/store/useUserProfileStore";
-import { useDashboardStore } from "@/lib/store/useDashboardStore";
-import { AISettingsForm } from "@/components/settings/AISettingsForm";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { AISettingsForm } from "@/components/settings/AISettingsForm";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -19,6 +13,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Textarea } from "@/components/ui/textarea";
+import { useUserProfileStore } from "@/lib/store/useUserProfileStore";
 
 export default function SettingsPage() {
   const { profile, context, updateProfile, updateContext } =

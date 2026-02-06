@@ -1,5 +1,5 @@
-export { PersonalInfoEditor } from "./PersonalInfoEditor";
-export { ExperienceEditor } from "./ExperienceEditor";
 export { EducationEditor } from "./EducationEditor";
-export { SkillsEditor } from "./SkillsEditor";
+export { ExperienceEditor } from "./ExperienceEditor";
+export { PersonalInfoEditor } from "./PersonalInfoEditor";
 export { ProjectsEditor } from "./ProjectsEditor";
+export { SkillsEditor } from "./SkillsEditor";

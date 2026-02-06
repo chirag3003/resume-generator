@@ -1,6 +1,19 @@
 /** biome-ignore-all lint/a11y/useSemanticElements: <not needed> */
 "use client";
 
+import {
+  Copy,
+  FileText,
+  Loader2,
+  MoreVertical,
+  Plus,
+  Sparkles,
+  Trash2,
+} from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -23,23 +36,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { generateFullResume } from "@/lib/ai/aiService";
 import { useAISettingsStore } from "@/lib/store/useAISettingsStore";
 import {
-  useDashboardStore,
   type SavedResume,
+  useDashboardStore,
 } from "@/lib/store/useDashboardStore";
 import { useUserProfileStore } from "@/lib/store/useUserProfileStore";
-import {
-  Copy,
-  FileText,
-  Loader2,
-  MoreVertical,
-  Plus,
-  Sparkles,
-  Trash2,
-} from "lucide-react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { toast } from "sonner";
 
 function ResumeCard({ resume }: { resume: SavedResume }) {
   const router = useRouter();
