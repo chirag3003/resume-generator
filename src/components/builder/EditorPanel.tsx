@@ -19,15 +19,15 @@ import {
 
 export function EditorPanel() {
   return (
-    <div className="h-full flex flex-col bg-background border-r">
-      <div className="p-4 border-b">
+    <div className="h-full flex flex-col bg-background border-r overflow-hidden">
+      <div className="p-4 border-b shrink-0">
         <h2 className="font-semibold text-lg">Resume Editor</h2>
         <p className="text-sm text-muted-foreground">
           Edit your resume details
         </p>
       </div>
 
-      <ScrollArea className="flex-1">
+      <ScrollArea className="flex-1 h-0">
         <Tabs defaultValue="personal" className="p-4">
           <TabsList className="grid w-full grid-cols-5 mb-4">
             <TabsTrigger value="personal" className="text-xs">
