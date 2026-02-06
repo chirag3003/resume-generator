@@ -1,9 +1,10 @@
 "use client";
 
-import { Download, Loader2 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { Download, Loader2 } from "lucide-react";
 import type { ResumeData } from "@/lib/schema";
+import { useResumeStore } from "@/lib/store/useResumeStore";
 
 interface PDFDownloadButtonProps {
   data: ResumeData;
@@ -12,6 +13,7 @@ interface PDFDownloadButtonProps {
 export function PDFDownloadButton({ data }: PDFDownloadButtonProps) {
   const [isClient, setIsClient] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const { activeTemplate } = useResumeStore();
   const fileName = `${data.personalInfo.fullName.replace(/\s+/g, "_")}_Resume.pdf`;
 
   useEffect(() => {
@@ -21,13 +23,33 @@ export function PDFDownloadButton({ data }: PDFDownloadButtonProps) {
   const handleDownload = async () => {
     setIsLoading(true);
     try {
-      // Dynamic import to avoid SSR issues
       const { pdf } = await import("@react-pdf/renderer");
-      const { ResumePDFDocument } = await import(
-        "@/components/pdf/ResumePDFDocument"
-      );
 
-      const blob = await pdf(<ResumePDFDocument data={data} />).toBlob();
+      let PdfComponent: React.ComponentType<{ data: ResumeData }>;
+
+      switch (activeTemplate) {
+        case "modern":
+          const { ModernPDFDocument } = await import(
+            "@/components/pdf/ModernPDFDocument"
+          );
+          PdfComponent = ModernPDFDocument;
+          break;
+        case "minimal":
+          const { MinimalPDFDocument } = await import(
+            "@/components/pdf/MinimalPDFDocument"
+          );
+          PdfComponent = MinimalPDFDocument;
+          break;
+        case "classic":
+        default:
+          const { ResumePDFDocument } = await import(
+            "@/components/pdf/ResumePDFDocument"
+          );
+          PdfComponent = ResumePDFDocument;
+          break;
+      }
+
+      const blob = await pdf(<PdfComponent data={data} />).toBlob();
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;

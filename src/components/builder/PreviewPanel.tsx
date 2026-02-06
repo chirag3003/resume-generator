@@ -2,10 +2,14 @@
 
 import { useRef, useEffect, useState, useCallback } from "react";
 import type { ResumeData } from "@/lib/schema";
+import { useResumeStore } from "@/lib/store/useResumeStore";
 import { ClassicATSTemplate } from "@/components/templates/ClassicATSTemplate";
+import { ModernTemplate } from "@/components/templates/ModernTemplate";
+import { MinimalTemplate } from "@/components/templates/MinimalTemplate";
 import { Button } from "@/components/ui/button";
 import { ZoomIn, ZoomOut, RotateCcw } from "lucide-react";
 import { PDFDownloadButton } from "./PDFDownloadButton";
+import { TemplateSelector } from "./TemplateSelector";
 
 interface PreviewPanelProps {
   data: ResumeData;
@@ -16,6 +20,7 @@ export function PreviewPanel({ data }: PreviewPanelProps) {
   const [scale, setScale] = useState(0.6);
   const [autoScale, setAutoScale] = useState(0.6);
   const [isAutoScale, setIsAutoScale] = useState(true);
+  const { activeTemplate } = useResumeStore();
 
   const calculateAutoScale = useCallback(() => {
     if (!containerRef.current) return 0.6;
@@ -68,6 +73,18 @@ export function PreviewPanel({ data }: PreviewPanelProps) {
 
   const zoomPercentage = Math.round(scale * 100);
 
+  const renderTemplate = () => {
+    switch (activeTemplate) {
+      case "modern":
+        return <ModernTemplate data={data} />;
+      case "minimal":
+        return <MinimalTemplate data={data} />;
+      case "classic":
+      default:
+        return <ClassicATSTemplate data={data} />;
+    }
+  };
+
   return (
     <div
       ref={containerRef}
@@ -75,34 +92,38 @@ export function PreviewPanel({ data }: PreviewPanelProps) {
     >
       {/* Controls */}
       <div className="flex items-center justify-between p-3 bg-background/80 backdrop-blur border-b shrink-0">
-        <div className="flex items-center gap-2">
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={handleZoomOut}
-            disabled={scale <= 0.3}
-          >
-            <ZoomOut className="h-4 w-4" />
-          </Button>
-          <span className="text-sm font-medium w-14 text-center">
-            {zoomPercentage}%
-          </span>
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={handleZoomIn}
-            disabled={scale >= 1.5}
-          >
-            <ZoomIn className="h-4 w-4" />
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={handleReset}
-            title="Reset zoom"
-          >
-            <RotateCcw className="h-4 w-4" />
-          </Button>
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={handleZoomOut}
+              disabled={scale <= 0.3}
+            >
+              <ZoomOut className="h-4 w-4" />
+            </Button>
+            <span className="text-sm font-medium w-14 text-center">
+              {zoomPercentage}%
+            </span>
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={handleZoomIn}
+              disabled={scale >= 1.5}
+            >
+              <ZoomIn className="h-4 w-4" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handleReset}
+              title="Reset zoom"
+            >
+              <RotateCcw className="h-4 w-4" />
+            </Button>
+          </div>
+
+          <TemplateSelector />
         </div>
 
         <PDFDownloadButton data={data} />
@@ -116,7 +137,7 @@ export function PreviewPanel({ data }: PreviewPanelProps) {
             transform: `scale(${scale})`,
           }}
         >
-          <ClassicATSTemplate data={data} />
+          {renderTemplate()}
         </div>
       </div>
     </div>
