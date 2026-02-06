@@ -1,20 +1,20 @@
 "use client";
 
+import {
+  Briefcase,
+  FolderKanban,
+  GraduationCap,
+  User,
+  Wrench,
+} from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
-  User,
-  Briefcase,
-  GraduationCap,
-  Wrench,
-  FolderKanban,
-} from "lucide-react";
-import {
-  PersonalInfoEditor,
-  ExperienceEditor,
   EducationEditor,
-  SkillsEditor,
+  ExperienceEditor,
+  PersonalInfoEditor,
   ProjectsEditor,
+  SkillsEditor,
 } from "./editors";
 
 export function EditorPanel() {

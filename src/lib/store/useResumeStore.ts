@@ -14,21 +14,25 @@ interface ResumeStore {
     addExperience: (experience: Experience) => void;
     updateExperience: (id: string, experience: Partial<Experience>) => void;
     removeExperience: (id: string) => void;
+    reorderExperience: (oldIndex: number, newIndex: number) => void;
 
     // Education actions
     addEducation: (education: Education) => void;
     updateEducation: (id: string, education: Partial<Education>) => void;
     removeEducation: (id: string) => void;
+    reorderEducation: (oldIndex: number, newIndex: number) => void;
 
     // Skills actions
     addSkill: (skill: Skill) => void;
     updateSkill: (id: string, skill: Partial<Skill>) => void;
     removeSkill: (id: string) => void;
+    reorderSkills: (oldIndex: number, newIndex: number) => void;
 
     // Projects actions
     addProject: (project: Project) => void;
     updateProject: (id: string, project: Partial<Project>) => void;
     removeProject: (id: string) => void;
+    reorderProjects: (oldIndex: number, newIndex: number) => void;
 
     // Template
     setActiveTemplate: (template: string) => void;
@@ -78,6 +82,16 @@ export const useResumeStore = create<ResumeStore>((set) => ({
             },
         })),
 
+    reorderExperience: (oldIndex, newIndex) =>
+        set((state) => {
+            const items = [...state.resumeData.experience];
+            const [removed] = items.splice(oldIndex, 1);
+            items.splice(newIndex, 0, removed);
+            return {
+                resumeData: { ...state.resumeData, experience: items },
+            };
+        }),
+
     // Education
     addEducation: (education) =>
         set((state) => ({
@@ -104,6 +118,16 @@ export const useResumeStore = create<ResumeStore>((set) => ({
                 education: state.resumeData.education.filter((edu) => edu.id !== id),
             },
         })),
+
+    reorderEducation: (oldIndex, newIndex) =>
+        set((state) => {
+            const items = [...state.resumeData.education];
+            const [removed] = items.splice(oldIndex, 1);
+            items.splice(newIndex, 0, removed);
+            return {
+                resumeData: { ...state.resumeData, education: items },
+            };
+        }),
 
     // Skills
     addSkill: (skill) =>
@@ -132,6 +156,16 @@ export const useResumeStore = create<ResumeStore>((set) => ({
             },
         })),
 
+    reorderSkills: (oldIndex, newIndex) =>
+        set((state) => {
+            const items = [...state.resumeData.skills];
+            const [removed] = items.splice(oldIndex, 1);
+            items.splice(newIndex, 0, removed);
+            return {
+                resumeData: { ...state.resumeData, skills: items },
+            };
+        }),
+
     // Projects
     addProject: (project) =>
         set((state) => ({
@@ -158,6 +192,16 @@ export const useResumeStore = create<ResumeStore>((set) => ({
                 projects: state.resumeData.projects.filter((p) => p.id !== id),
             },
         })),
+
+    reorderProjects: (oldIndex, newIndex) =>
+        set((state) => {
+            const items = [...state.resumeData.projects];
+            const [removed] = items.splice(oldIndex, 1);
+            items.splice(newIndex, 0, removed);
+            return {
+                resumeData: { ...state.resumeData, projects: items },
+            };
+        }),
 
     setActiveTemplate: (template) => set({ activeTemplate: template }),
 }));
