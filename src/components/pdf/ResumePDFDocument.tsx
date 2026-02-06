@@ -126,14 +126,14 @@ export function ResumePDFDocument({ data }: ResumePDFDocumentProps) {
           <View style={styles.contactInfo}>
             <Text style={styles.contactItem}>{personalInfo.email}</Text>
             {personalInfo.phone && (
-              <Text style={styles.contactItem}>• {personalInfo.phone}</Text>
+              <Text style={styles.contactItem}>| {personalInfo.phone}</Text>
             )}
             {personalInfo.location && (
-              <Text style={styles.contactItem}>• {personalInfo.location}</Text>
+              <Text style={styles.contactItem}>| {personalInfo.location}</Text>
             )}
             {personalInfo.linkedin && (
               <Text style={styles.contactItem}>
-                •{" "}
+                |{" "}
                 {personalInfo.linkedin
                   .replace("https://", "")
                   .replace("http://", "")}
@@ -141,7 +141,7 @@ export function ResumePDFDocument({ data }: ResumePDFDocumentProps) {
             )}
             {personalInfo.github && (
               <Text style={styles.contactItem}>
-                •{" "}
+                |{" "}
                 {personalInfo.github
                   .replace("https://", "")
                   .replace("http://", "")}
@@ -149,7 +149,7 @@ export function ResumePDFDocument({ data }: ResumePDFDocumentProps) {
             )}
             {personalInfo.portfolio && (
               <Text style={styles.contactItem}>
-                •{" "}
+                |{" "}
                 {personalInfo.portfolio
                   .replace("https://", "")
                   .replace("http://", "")}
@@ -157,7 +157,7 @@ export function ResumePDFDocument({ data }: ResumePDFDocumentProps) {
             )}
             {personalInfo.website && (
               <Text style={styles.contactItem}>
-                • {personalInfo.website.replace("https://", "")}
+                | {personalInfo.website.replace("https://", "")}
               </Text>
             )}
           </View>
