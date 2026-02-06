@@ -1,6 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { useResumeStore } from "@/lib/store/useResumeStore";
+import { useAISettingsStore } from "@/lib/store/useAISettingsStore";
 import {
   Accordion,
   AccordionContent,
@@ -11,7 +13,15 @@ import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { Plus, Trash2, X, GripVertical } from "lucide-react";
+import {
+  Plus,
+  Trash2,
+  X,
+  GripVertical,
+  Wand2,
+  Loader2,
+  Sparkles,
+} from "lucide-react";
 import {
   DndContext,
   closestCenter,
@@ -28,15 +38,18 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { generateContent } from "@/lib/ai/aiService";
+import { BULLET_ENHANCER_PROMPT } from "@/lib/ai/prompts";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { toast } from "sonner";
 
-function SortableExperienceItem({
-  exp,
-  updateExperience,
-  removeExperience,
-  handleAddHighlight,
-  handleUpdateHighlight,
-  handleRemoveHighlight,
-}: {
+interface SortableExperienceItemProps {
   exp: {
     id: string;
     title: string;
@@ -46,12 +59,30 @@ function SortableExperienceItem({
     endDate?: string;
     highlights: string[];
   };
-  updateExperience: (id: string, data: Partial<typeof exp>) => void;
+  updateExperience: (id: string, data: Partial<any>) => void;
   removeExperience: (id: string) => void;
   handleAddHighlight: (id: string) => void;
   handleUpdateHighlight: (id: string, idx: number, value: string) => void;
   handleRemoveHighlight: (id: string, idx: number) => void;
-}) {
+  onEnhance: (
+    expId: string,
+    idx: number,
+    text: string,
+    context: { role: string; company: string },
+  ) => void;
+  isEnhancing: (expId: string, idx: number) => boolean;
+}
+
+function SortableExperienceItem({
+  exp,
+  updateExperience,
+  removeExperience,
+  handleAddHighlight,
+  handleUpdateHighlight,
+  handleRemoveHighlight,
+  onEnhance,
+  isEnhancing,
+}: SortableExperienceItemProps) {
   const {
     attributes,
     listeners,
@@ -160,18 +191,40 @@ function SortableExperienceItem({
             </div>
             <div className="space-y-2">
               {exp.highlights.map((highlight, idx) => (
-                <div key={idx} className="flex gap-2">
-                  <Input
-                    value={highlight}
-                    onChange={(e) =>
-                      handleUpdateHighlight(exp.id, idx, e.target.value)
-                    }
-                    placeholder="Describe an achievement..."
-                  />
+                <div key={idx} className="flex gap-2 items-start">
+                  <div className="flex-1 relative">
+                    <Input
+                      value={highlight}
+                      onChange={(e) =>
+                        handleUpdateHighlight(exp.id, idx, e.target.value)
+                      }
+                      placeholder="Describe an achievement..."
+                      className="pr-8"
+                    />
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="absolute right-1 top-1 h-7 w-7 text-blue-500 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-900/20"
+                      title="Improve with AI"
+                      onClick={() =>
+                        onEnhance(exp.id, idx, highlight, {
+                          role: exp.title,
+                          company: exp.company,
+                        })
+                      }
+                      disabled={!highlight || isEnhancing(exp.id, idx)}
+                    >
+                      {isEnhancing(exp.id, idx) ? (
+                        <Loader2 className="h-3 w-3 animate-spin" />
+                      ) : (
+                        <Sparkles className="h-3 w-3" />
+                      )}
+                    </Button>
+                  </div>
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="shrink-0"
+                    className="shrink-0 mt-0.5"
                     onClick={() => handleRemoveHighlight(exp.id, idx)}
                   >
                     <X className="h-4 w-4" />
@@ -205,7 +258,16 @@ export function ExperienceEditor() {
     reorderExperience,
   } = useResumeStore();
   const { experience } = resumeData;
+  const settings = useAISettingsStore();
 
+  const [enhancingId, setEnhancingId] = useState<{
+    id: string;
+    idx: number;
+  } | null>(null);
+  const [enhancementOptions, setEnhancementOptions] = useState<string[]>([]);
+  const [showOptions, setShowOptions] = useState(false);
+
+  // Drag sensors
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -259,6 +321,70 @@ export function ExperienceEditor() {
     updateExperience(expId, { highlights: newHighlights });
   };
 
+  const handleEnhance = async (
+    expId: string,
+    idx: number,
+    text: string,
+    context: { role: string; company: string },
+  ) => {
+    const provider = settings.selectedProvider;
+    if (!settings.hasKey(provider)) {
+      toast.error(
+        `Please configure your ${provider} API key in settings first.`,
+      );
+      return;
+    }
+
+    setEnhancingId({ id: expId, idx });
+    try {
+      const promptData = {
+        originalText: text,
+        role: context.role || "Employee",
+        company: context.company || "Company",
+      };
+
+      const prompt = JSON.stringify(promptData);
+
+      const response = await generateContent({
+        provider,
+        settings,
+        prompt,
+        systemPrompt: BULLET_ENHANCER_PROMPT.replace(
+          "{originalText}",
+          promptData.originalText,
+        )
+          .replace("{role}", promptData.role)
+          .replace("{company}", promptData.company),
+      });
+
+      const json = JSON.parse(response);
+      if (json.options && Array.isArray(json.options)) {
+        setEnhancementOptions(json.options);
+        setShowOptions(true);
+      } else {
+        throw new Error("Invalid response");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to enhance text. Please try again.");
+      setEnhancingId(null); // Reset on error
+    }
+    // Do not reset enhancingId here on success, keep it until selection or close
+  };
+
+  const handleSelectEnhancement = (option: string) => {
+    if (enhancingId) {
+      handleUpdateHighlight(enhancingId.id, enhancingId.idx, option);
+    }
+    setShowOptions(false);
+    setEnhancingId(null);
+  };
+
+  const handleCloseDialog = (open: boolean) => {
+    setShowOptions(open);
+    if (!open) setEnhancingId(null);
+  };
+
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
@@ -288,6 +414,10 @@ export function ExperienceEditor() {
                 handleAddHighlight={handleAddHighlight}
                 handleUpdateHighlight={handleUpdateHighlight}
                 handleRemoveHighlight={handleRemoveHighlight}
+                onEnhance={handleEnhance}
+                isEnhancing={(id, idx) =>
+                  enhancingId?.id === id && enhancingId?.idx === idx
+                }
               />
             ))}
           </Accordion>
@@ -299,6 +429,29 @@ export function ExperienceEditor() {
           No work experience added yet. Click "Add" to get started.
         </p>
       )}
+
+      {/* Options Dialog */}
+      <Dialog open={showOptions} onOpenChange={handleCloseDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Enhanced Suggestions</DialogTitle>
+            <DialogDescription>
+              Select an improved version of your bullet point.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-3 py-4">
+            {enhancementOptions.map((option, i) => (
+              <div
+                key={i}
+                className="p-3 border rounded-lg hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 cursor-pointer transition-colors"
+                onClick={() => handleSelectEnhancement(option)}
+              >
+                <p className="text-sm">{option}</p>
+              </div>
+            ))}
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

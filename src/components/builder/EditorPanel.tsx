@@ -16,15 +16,19 @@ import {
   ProjectsEditor,
   SkillsEditor,
 } from "./editors";
+import { AISettingsDialog } from "./AISettingsDialog";
 
 export function EditorPanel() {
   return (
     <div className="h-full flex flex-col bg-background border-r overflow-hidden">
-      <div className="p-4 border-b shrink-0">
-        <h2 className="font-semibold text-lg">Resume Editor</h2>
-        <p className="text-sm text-muted-foreground">
-          Edit your resume details
-        </p>
+      <div className="p-4 border-b shrink-0 flex items-start justify-between">
+        <div>
+          <h2 className="font-semibold text-lg">Resume Editor</h2>
+          <p className="text-sm text-muted-foreground">
+            Edit your resume details
+          </p>
+        </div>
+        <AISettingsDialog />
       </div>
 
       <ScrollArea className="flex-1 h-0">
