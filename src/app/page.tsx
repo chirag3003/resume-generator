@@ -22,7 +22,7 @@ export default function Home() {
               <FileText className="h-6 w-6 text-blue-600" />
               <span className="font-bold text-xl">ResumeBuilder</span>
             </div>
-            <Link href="/builder">
+            <Link href="/dashboard">
               <Button>Get Started</Button>
             </Link>
           </div>
@@ -48,7 +48,7 @@ export default function Home() {
               Choose from beautiful templates and download as PDF instantly.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link href="/builder">
+              <Link href="/dashboard">
                 <Button size="lg" className="gap-2 text-lg px-8 py-6">
                   Start Building Free
                   <ArrowRight className="h-5 w-5" />
