@@ -10,13 +10,13 @@ import {
 
 export type AIModel =
   | "gpt-4o-mini"
-  | "gemini-1.5-flash"
+  | "gemini-3-flash-preview"
   | "claude-3-haiku-20240307";
 
 // Provider-specific default models
 export const DEFAULT_MODELS = {
   openai: "gpt-4o-mini",
-  google: "gemini-1.5-flash",
+  google: "gemini-3-flash-preview",
   anthropic: "claude-3-haiku-20240307",
 };
 

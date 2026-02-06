@@ -138,15 +138,18 @@ export function AISettingsForm({ onSave, onCancel }: AISettingsFormProps) {
               )}
               {settings.selectedProvider === "google" && (
                 <>
-                  <SelectItem value="gemini-1.5-flash">
-                    Gemini 1.5 Flash
+                  <SelectItem value="gemini-3-flash-preview">
+                    Gemini 3 Flash (Default)
                   </SelectItem>
-                  <SelectItem value="gemini-1.5-flash-002">
-                    Gemini 1.5 Flash-002
+                  <SelectItem value="gemini-3-pro-preview">
+                    Gemini 3 Pro
                   </SelectItem>
-                  <SelectItem value="gemini-1.5-pro">Gemini 1.5 Pro</SelectItem>
-                  <SelectItem value="gemini-1.5-pro-002">
-                    Gemini 1.5 Pro-002
+                  <SelectItem value="gemini-2.5-pro">Gemini 2.5 Pro</SelectItem>
+                  <SelectItem value="gemini-2.5-flash">
+                    Gemini 2.5 Flash
+                  </SelectItem>
+                  <SelectItem value="gemini-2.5-flash-lite">
+                    Gemini 2.5 Flash-Lite
                   </SelectItem>
                 </>
               )}
