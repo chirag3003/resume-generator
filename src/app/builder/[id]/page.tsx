@@ -75,7 +75,7 @@ export default function BuilderPage() {
             </Button>
           </Link>
           <div className="flex items-center gap-2">
-            <FileText className="h-5 w-5 text-blue-600" />
+            <FileText className="h-5 w-5 text-primary" />
             <span className="font-medium truncate max-w-[200px]">
               {activeResume.name}
             </span>

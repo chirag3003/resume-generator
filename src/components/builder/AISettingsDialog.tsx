@@ -95,7 +95,7 @@ export function AISettingsDialog() {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-blue-500" />
+            <Sparkles className="h-5 w-5 text-primary" />
             AI Configuration
           </DialogTitle>
           <DialogDescription>

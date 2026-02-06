@@ -63,7 +63,7 @@ function ResumeCard({ resume }: { resume: SavedResume }) {
       onKeyDown={(e) => e.key === "Enter" && handleOpen()}
       role="button"
       tabIndex={0}
-      className="group relative bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden cursor-pointer hover:shadow-lg hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-200"
+      className="group relative bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden cursor-pointer hover:shadow-lg hover:border-primary/50 transition-all duration-200"
     >
       {/* Preview Area */}
       <div className="aspect-[8.5/11] bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center relative">
@@ -173,10 +173,10 @@ function CreateResumeDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <div className="group relative bg-slate-50 dark:bg-slate-800/50 rounded-xl border-2 border-dashed border-slate-300 dark:border-slate-600 overflow-hidden cursor-pointer hover:border-blue-400 dark:hover:border-blue-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200">
+        <div className="group relative bg-slate-50 dark:bg-slate-800/50 rounded-xl border-2 border-dashed border-slate-300 dark:border-slate-600 overflow-hidden cursor-pointer hover:border-primary/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200">
           <div className="aspect-[8.5/11] flex flex-col items-center justify-center text-slate-400 dark:text-slate-500">
-            <div className="w-16 h-16 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center mb-4 group-hover:bg-blue-100 dark:group-hover:bg-blue-900/30 transition-colors">
-              <Plus className="h-8 w-8 group-hover:text-blue-600 transition-colors" />
+            <div className="w-16 h-16 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center mb-4 group-hover:bg-primary/10 transition-colors">
+              <Plus className="h-8 w-8 group-hover:text-primary transition-colors" />
             </div>
             <span className="font-medium text-slate-600 dark:text-slate-400">
               Create New Resume
@@ -229,7 +229,7 @@ export default function DashboardPage() {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-4">
               <Link href="/" className="flex items-center gap-2">
-                <FileText className="h-6 w-6 text-blue-600" />
+                <FileText className="h-6 w-6 text-primary" />
                 <span className="font-bold text-xl">ResumeBuilder</span>
               </Link>
             </div>

@@ -204,7 +204,7 @@ function SortableExperienceItem({
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="absolute right-1 top-1 h-7 w-7 text-blue-500 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-900/20"
+                      className="absolute right-1 top-1 h-7 w-7 text-primary hover:text-primary hover:bg-primary/10"
                       title="Improve with AI"
                       onClick={() =>
                         onEnhance(exp.id, idx, highlight, {

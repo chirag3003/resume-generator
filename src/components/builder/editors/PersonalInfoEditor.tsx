@@ -172,7 +172,7 @@ export function PersonalInfoEditor() {
             <Button
               variant="outline"
               size="sm"
-              className="h-7 text-xs gap-1.5 text-blue-600 border-blue-200 hover:bg-blue-50 dark:text-blue-400 dark:border-blue-900 dark:hover:bg-blue-950"
+              className="h-7 text-xs gap-1.5 text-primary border-primary/20 hover:bg-primary/5"
               onClick={handleGenerateSummary}
               disabled={isGenerating}
             >

@@ -19,7 +19,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-2">
-              <FileText className="h-6 w-6 text-blue-600" />
+              <FileText className="h-6 w-6 text-primary" />
               <span className="font-bold text-xl">ResumeBuilder</span>
             </div>
             <Link href="/dashboard">
@@ -33,7 +33,7 @@ export default function Home() {
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-4xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 dark:bg-blue-950 rounded-full text-blue-600 dark:text-blue-400 text-sm font-medium mb-8">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-medium mb-8">
               <Sparkles className="h-4 w-4" />
               Free & ATS-Optimized
             </div>
@@ -136,8 +136,8 @@ export default function Home() {
                 key={index}
                 className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow duration-300"
               >
-                <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center mb-4">
-                  <feature.icon className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+                  <feature.icon className="h-6 w-6 text-primary" />
                 </div>
                 <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
                   {feature.title}
@@ -215,7 +215,7 @@ export default function Home() {
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
             Ready to Build Your Dream Resume?
           </h2>
-          <p className="text-lg text-blue-100 mb-8">
+          <p className="text-lg text-primary-foreground/90 mb-8">
             Join thousands of job seekers who've landed their dream jobs with
             our resume builder.
           </p>
@@ -253,7 +253,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
-              <FileText className="h-5 w-5 text-blue-500" />
+              <FileText className="h-5 w-5 text-primary" />
               <span className="font-semibold text-white">ResumeBuilder</span>
             </div>
             <p className="text-sm">
