@@ -49,6 +49,10 @@ export const metadata: Metadata = {
       "Create professional, ATS-friendly resumes in minutes with our AI-powered resume builder.",
     creator: "@CBhalotia",
   },
+  icons: {
+    icon: "/icon.png",
+    apple: "/icon.png",
+  },
 };
 
 export default function RootLayout({
