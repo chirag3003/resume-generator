@@ -28,7 +28,6 @@ export default function Home() {
           </div>
         </div>
       </nav>
-
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
@@ -62,7 +61,7 @@ export default function Home() {
                 View Templates
               </Button>
             </div>
-            <div className="mt-8 text-sm text-slate-500 dark:text-slate-500">
+            <div className="mt-8 text-sm font-medium text-slate-900 dark:text-slate-200">
               Built by{" "}
               <a
                 href="https://chirag.codes"
@@ -91,7 +90,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* Features Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-900/50">
         <div className="max-w-7xl mx-auto">
@@ -161,7 +159,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* Templates Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
@@ -218,47 +215,7 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-600 to-violet-600">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-            Ready to Build Your Dream Resume?
-          </h2>
-          <p className="text-lg text-primary-foreground/90 mb-8">
-            Join thousands of job seekers who've landed their dream jobs with
-            our resume builder.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/builder">
-              <Button
-                size="lg"
-                variant="secondary"
-                className="gap-2 text-lg px-8 py-6"
-              >
-                Start Building Now
-                <ArrowRight className="h-5 w-5" />
-              </Button>
-            </Link>
-          </div>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-white/80 text-sm">
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="h-4 w-4" />
-              <span>100% Free</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="h-4 w-4" />
-              <span>No Account Required</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="h-4 w-4" />
-              <span>Instant Download</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
+      </section>{" "}
       {/* Footer */}
       <footer className="py-12 px-4 sm:px-6 lg:px-8 bg-slate-900 text-slate-400">
         <div className="max-w-7xl mx-auto">
@@ -278,7 +235,7 @@ export default function Home() {
                   href="https://chirag.codes"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-medium text-slate-900 dark:text-slate-200 hover:underline"
+                  className="font-medium text-slate-200 hover:text-white hover:underline transition-colors"
                 >
                   Chirag Bhalotia
                 </a>
