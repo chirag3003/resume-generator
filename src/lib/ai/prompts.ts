@@ -126,3 +126,27 @@ JSON Schema (ResumeData):
   ]
 }
 `;
+
+export const CHAT_EDIT_PROMPT = `
+You are an expert resume editor. Your goal is to modify the provided resume JSON based on the user's request.
+
+Input:
+- Current Resume: {resumeData}
+- User Request: "{userRequest}"
+- Chat History: {history}
+
+Instructions:
+1. Return a JSON object containing:
+   - "updatedResume": The complete resume JSON with the requested changes applied.
+   - "responseMessage": A short, friendly confirmation message processing the change (e.g., "I've updated your summary.").
+2. If the user's request is a question and not an edit, set "updatedResume" to null and "responseMessage" to your answer.
+3. If the request is ambiguous, ask for clarification in "responseMessage" and set "updatedResume" to null.
+4. Maintain the structure of the resume JSON exactly.
+5. Prioritize the user's specific instructions.
+
+JSON Schema:
+{
+  "updatedResume": ResumeData | null,
+  "responseMessage": "string"
+}
+`;

@@ -6,6 +6,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { EditorPanel } from "@/components/builder/EditorPanel";
 import { PreviewPanel } from "@/components/builder/PreviewPanel";
+import { ChatPanel } from "@/components/builder/ChatPanel";
 import { Button } from "@/components/ui/button";
 import { useDashboardStore } from "@/lib/store/useDashboardStore";
 import { useResumeStore } from "@/lib/store/useResumeStore";
@@ -121,6 +122,11 @@ export default function BuilderPage() {
           `}
         >
           <PreviewPanel data={resumeData} />
+        </div>
+
+        {/* Chat Panel - Desktop: Fixed width on right. Mobile: Hidden for now (future: add toggle) */}
+        <div className="hidden lg:block w-[320px] h-full overflow-hidden shrink-0">
+          <ChatPanel resumeId={id} />
         </div>
       </div>
     </div>

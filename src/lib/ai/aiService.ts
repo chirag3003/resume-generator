@@ -3,7 +3,10 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import OpenAI from "openai";
 import type { AISettings } from "@/lib/store/useAISettingsStore";
 import type { ResumeData } from "../schema";
-import { FULL_RESUME_PROMPT } from "./prompts";
+import {
+  FULL_RESUME_PROMPT,
+  CHAT_EDIT_PROMPT,
+} from "./prompts";
 
 export type AIModel =
   | "gpt-4o-mini"
@@ -168,7 +171,7 @@ export async function generateFullResume({
   const response = await generateContent({
     prompt: "Generate the JSON.",
     systemPrompt,
-    provider: "openai", // defaulting to openai or settings.selectedProvider if verified
+    provider: settings.selectedProvider,
     settings,
     context, // Implicitly adds context to standard prompt as well
   });
@@ -178,5 +181,44 @@ export async function generateFullResume({
   } catch (e) {
     console.error("Failed to parse resume JSON", e, response);
     throw new Error("AI failed to generate valid JSON");
+  }
+}
+
+export async function chatEditResume({
+  currentResume,
+  userMessage,
+  history,
+  settings,
+}: {
+  currentResume: ResumeData;
+  userMessage: string;
+  history: { role: string; content: string }[];
+  settings: AISettings;
+}): Promise<{ updatedResume: ResumeData | null; responseMessage: string }> {
+  const systemPrompt = CHAT_EDIT_PROMPT.replace(
+    "{resumeData}",
+    JSON.stringify(currentResume),
+  )
+    .replace("{userRequest}", userMessage)
+    .replace("{history}", JSON.stringify(history));
+
+  const response = await generateContent({
+    prompt: "Process the request.",
+    systemPrompt,
+    provider: settings.selectedProvider,
+    settings,
+  });
+
+  try {
+    // Clean up potential markdown code blocks
+    const cleanResponse = response.replace(/```json\n?|\n?```/g, "");
+    const json = JSON.parse(cleanResponse);
+    return {
+      updatedResume: json.updatedResume,
+      responseMessage: json.responseMessage,
+    };
+  } catch (e) {
+    console.error("Failed to parse chat edit JSON", e, response);
+    throw new Error("AI failed to process the request");
   }
 }
