@@ -1,35 +1,15 @@
+/** biome-ignore-all lint/a11y/noStaticElementInteractions: <not needed> */
+/** biome-ignore-all lint/a11y/useKeyWithClickEvents: <not needed> */
 "use client";
 
-import { useState } from "react";
-import { useResumeStore } from "@/lib/store/useResumeStore";
-import { useAISettingsStore } from "@/lib/store/useAISettingsStore";
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Separator } from "@/components/ui/separator";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
-import {
-  Plus,
-  Trash2,
-  X,
-  GripVertical,
-  Wand2,
-  Loader2,
-  Sparkles,
-} from "lucide-react";
-import {
-  DndContext,
   closestCenter,
+  DndContext,
+  type DragEndEvent,
   KeyboardSensor,
   PointerSensor,
   useSensor,
   useSensors,
-  type DragEndEvent,
 } from "@dnd-kit/core";
 import {
   SortableContext,
@@ -38,8 +18,16 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { generateContent } from "@/lib/ai/aiService";
-import { BULLET_ENHANCER_PROMPT } from "@/lib/ai/prompts";
+import { GripVertical, Loader2, Plus, Sparkles, Trash2, X } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -47,9 +35,14 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { toast } from "sonner";
-
-import { type Experience } from "@/lib/schema/resume";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
+import { generateContent } from "@/lib/ai/aiService";
+import { BULLET_ENHANCER_PROMPT } from "@/lib/ai/prompts";
+import type { Experience } from "@/lib/schema/resume";
+import { useAISettingsStore } from "@/lib/store/useAISettingsStore";
+import { useResumeStore } from "@/lib/store/useResumeStore";
 
 interface SortableExperienceItemProps {
   exp: {

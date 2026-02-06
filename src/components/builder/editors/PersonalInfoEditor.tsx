@@ -1,15 +1,11 @@
+/** biome-ignore-all lint/a11y/noStaticElementInteractions: <not needed> */
+/** biome-ignore-all lint/a11y/useKeyWithClickEvents: <not needed> */
 "use client";
 
+import { Loader2, Sparkles } from "lucide-react";
 import { useState } from "react";
-import { useResumeStore } from "@/lib/store/useResumeStore";
-import { useAISettingsStore } from "@/lib/store/useAISettingsStore";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { Bot, Loader2, Sparkles } from "lucide-react";
-import { generateContent } from "@/lib/ai/aiService";
-import { SUMMARY_PROMPT } from "@/lib/ai/prompts";
 import {
   Dialog,
   DialogContent,
@@ -17,7 +13,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { toast } from "sonner";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { generateContent } from "@/lib/ai/aiService";
+import { SUMMARY_PROMPT } from "@/lib/ai/prompts";
+import { useAISettingsStore } from "@/lib/store/useAISettingsStore";
+import { useResumeStore } from "@/lib/store/useResumeStore";
 
 import { useUserProfileStore } from "@/lib/store/useUserProfileStore";
 
@@ -99,6 +101,7 @@ export function PersonalInfoEditor() {
     // Update all fields that exist in profile
     Object.entries(profile).forEach(([key, value]) => {
       if (value) {
+        // biome-ignore lint/suspicious/noExplicitAny: <it works>
         updatePersonalInfo(key as any, value);
       }
     });

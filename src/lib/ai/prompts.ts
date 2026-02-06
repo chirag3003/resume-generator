@@ -53,3 +53,76 @@ JSON schema:
   ]
 }
 `;
+
+export const FULL_RESUME_PROMPT = `
+You are an expert resume writer. Your goal is to generate a complete resume JSON based on the user's input and context.
+
+Input:
+- User Prompt: "{prompt}"
+- User Profile: {profile}
+- Global Context (Summary/Skills): {context}
+
+Instructions:
+1. Create a structured resume JSON object matching the schema below.
+2. Use the "User Prompt" as the primary direction for the role/industry.
+3. Use "User Profile" to fill personal information (name, email, etc.).
+4. Use "Global Context" to populate the summary and skills if relevant, or adapt them to fit the prompt.
+5. Manufacture realistic but placeholder experience and projects if the user prompt implies them (e.g., "Senior React Dev" implies 5+ years experience), BUT prioritize real data if provided in context.
+6. Ensure the tone is professional and ATS-friendly.
+7. Return strictly valid JSON.
+
+JSON Schema (ResumeData):
+{
+  "personalInfo": {
+    "fullName": "string",
+    "email": "string",
+    "phone": "string",
+    "location": "string",
+    "linkedin": "string",
+    "github": "string",
+    "portfolio": "string",
+    "website": "string",
+    "summary": "string"
+  },
+  "experience": [
+    {
+      "id": "exp-1", 
+      "title": "string",
+      "company": "string",
+      "location": "string",
+      "startDate": "string",
+      "endDate": "string (or empty)",
+      "highlights": ["string"]
+    }
+  ],
+  "education": [
+    {
+      "id": "edu-1",
+      "degree": "string",
+      "school": "string",
+      "location": "string",
+      "startDate": "string",
+      "endDate": "string",
+      "gpa": "string",
+      "highlights": ["string"]
+    }
+  ],
+  "skills": [
+    {
+      "id": "skill-1",
+      "name": "string",
+      "level": "beginner|intermediate|advanced|expert"
+    }
+  ],
+  "projects": [
+    {
+      "id": "proj-1",
+      "name": "string",
+      "description": "string",
+      "url": "string",
+      "technologies": ["string"],
+      "highlights": ["string"]
+    }
+  ]
+}
+`;

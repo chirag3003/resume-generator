@@ -111,3 +111,35 @@ async function generateAnthropic(prompt: string, systemPrompt: string, apiKey: s
     }
     return "";
 }
+
+export async function generateFullResume({
+    prompt,
+    settings,
+    context,
+    profile,
+}: {
+    prompt: string;
+    settings: AISettings;
+    context: { summary: string; skills: string; custom: string };
+    profile: any;
+}): Promise<ResumeData> {
+    const systemPrompt = FULL_RESUME_PROMPT
+        .replace("{prompt}", prompt)
+        .replace("{profile}", JSON.stringify(profile))
+        .replace("{context}", JSON.stringify(context));
+
+    const response = await generateContent({
+        prompt: "Generate the JSON.",
+        systemPrompt,
+        provider: "openai", // defaulting to openai or settings.selectedProvider if verified
+        settings,
+        context // Implicitly adds context to standard prompt as well
+    });
+
+    try {
+        return JSON.parse(response);
+    } catch (e) {
+        console.error("Failed to parse resume JSON", e, response);
+        throw new Error("AI failed to generate valid JSON");
+    }
+}
