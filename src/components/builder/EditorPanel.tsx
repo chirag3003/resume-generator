@@ -10,6 +10,9 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Separator } from "@/components/ui/separator";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import {
   User,
   Briefcase,
@@ -55,72 +58,73 @@ export function EditorPanel() {
           <TabsContent value="personal" className="space-y-4">
             <h3 className="font-medium">Personal Information</h3>
             <div className="space-y-3">
-              <div>
-                <label className="text-sm font-medium">Full Name</label>
-                <input
+              <div className="space-y-1.5">
+                <Label htmlFor="fullName">Full Name</Label>
+                <Input
+                  id="fullName"
                   type="text"
-                  className="w-full mt-1 px-3 py-2 border rounded-md bg-background text-sm"
                   value={personalInfo.fullName}
                   onChange={(e) =>
                     updatePersonalInfo("fullName", e.target.value)
                   }
                 />
               </div>
-              <div>
-                <label className="text-sm font-medium">Email</label>
-                <input
+              <div className="space-y-1.5">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
                   type="email"
-                  className="w-full mt-1 px-3 py-2 border rounded-md bg-background text-sm"
                   value={personalInfo.email}
                   onChange={(e) => updatePersonalInfo("email", e.target.value)}
                 />
               </div>
-              <div>
-                <label className="text-sm font-medium">Phone</label>
-                <input
+              <div className="space-y-1.5">
+                <Label htmlFor="phone">Phone</Label>
+                <Input
+                  id="phone"
                   type="tel"
-                  className="w-full mt-1 px-3 py-2 border rounded-md bg-background text-sm"
                   value={personalInfo.phone || ""}
                   onChange={(e) => updatePersonalInfo("phone", e.target.value)}
                 />
               </div>
-              <div>
-                <label className="text-sm font-medium">Location</label>
-                <input
+              <div className="space-y-1.5">
+                <Label htmlFor="location">Location</Label>
+                <Input
+                  id="location"
                   type="text"
-                  className="w-full mt-1 px-3 py-2 border rounded-md bg-background text-sm"
                   value={personalInfo.location || ""}
                   onChange={(e) =>
                     updatePersonalInfo("location", e.target.value)
                   }
                 />
               </div>
-              <div>
-                <label className="text-sm font-medium">LinkedIn</label>
-                <input
+              <div className="space-y-1.5">
+                <Label htmlFor="linkedin">LinkedIn</Label>
+                <Input
+                  id="linkedin"
                   type="url"
-                  className="w-full mt-1 px-3 py-2 border rounded-md bg-background text-sm"
                   value={personalInfo.linkedin || ""}
                   onChange={(e) =>
                     updatePersonalInfo("linkedin", e.target.value)
                   }
                 />
               </div>
-              <div>
-                <label className="text-sm font-medium">Website</label>
-                <input
+              <div className="space-y-1.5">
+                <Label htmlFor="website">Website</Label>
+                <Input
+                  id="website"
                   type="url"
-                  className="w-full mt-1 px-3 py-2 border rounded-md bg-background text-sm"
                   value={personalInfo.website || ""}
                   onChange={(e) =>
                     updatePersonalInfo("website", e.target.value)
                   }
                 />
               </div>
-              <div>
-                <label className="text-sm font-medium">Summary</label>
-                <textarea
-                  className="w-full mt-1 px-3 py-2 border rounded-md bg-background text-sm min-h-[100px]"
+              <div className="space-y-1.5">
+                <Label htmlFor="summary">Summary</Label>
+                <Textarea
+                  id="summary"
+                  className="min-h-[100px]"
                   value={personalInfo.summary || ""}
                   onChange={(e) =>
                     updatePersonalInfo("summary", e.target.value)
@@ -134,7 +138,7 @@ export function EditorPanel() {
           <TabsContent value="experience" className="space-y-4">
             <h3 className="font-medium">Work Experience</h3>
             <Accordion type="single" collapsible className="w-full">
-              {experience.map((exp, idx) => (
+              {experience.map((exp) => (
                 <AccordionItem key={exp.id} value={exp.id}>
                   <AccordionTrigger className="text-sm">
                     <div className="flex flex-col items-start text-left">
@@ -145,49 +149,31 @@ export function EditorPanel() {
                     </div>
                   </AccordionTrigger>
                   <AccordionContent className="space-y-3 px-1">
-                    <div>
-                      <label className="text-sm font-medium">Job Title</label>
-                      <input
-                        type="text"
-                        className="w-full mt-1 px-3 py-2 border rounded-md bg-background text-sm"
-                        value={exp.title}
-                        readOnly
-                      />
+                    <div className="space-y-1.5">
+                      <Label>Job Title</Label>
+                      <Input type="text" value={exp.title} readOnly />
                     </div>
-                    <div>
-                      <label className="text-sm font-medium">Company</label>
-                      <input
-                        type="text"
-                        className="w-full mt-1 px-3 py-2 border rounded-md bg-background text-sm"
-                        value={exp.company}
-                        readOnly
-                      />
+                    <div className="space-y-1.5">
+                      <Label>Company</Label>
+                      <Input type="text" value={exp.company} readOnly />
                     </div>
                     <div className="grid grid-cols-2 gap-2">
-                      <div>
-                        <label className="text-sm font-medium">
-                          Start Date
-                        </label>
-                        <input
-                          type="text"
-                          className="w-full mt-1 px-3 py-2 border rounded-md bg-background text-sm"
-                          value={exp.startDate}
-                          readOnly
-                        />
+                      <div className="space-y-1.5">
+                        <Label>Start Date</Label>
+                        <Input type="text" value={exp.startDate} readOnly />
                       </div>
-                      <div>
-                        <label className="text-sm font-medium">End Date</label>
-                        <input
+                      <div className="space-y-1.5">
+                        <Label>End Date</Label>
+                        <Input
                           type="text"
-                          className="w-full mt-1 px-3 py-2 border rounded-md bg-background text-sm"
                           value={exp.endDate || "Present"}
                           readOnly
                         />
                       </div>
                     </div>
                     <Separator />
-                    <div>
-                      <label className="text-sm font-medium">Highlights</label>
+                    <div className="space-y-1.5">
+                      <Label>Highlights</Label>
                       <ul className="list-disc list-inside text-sm text-muted-foreground mt-1">
                         {exp.highlights.map((h, i) => (
                           <li key={i}>{h}</li>
@@ -215,33 +201,18 @@ export function EditorPanel() {
                     </div>
                   </AccordionTrigger>
                   <AccordionContent className="space-y-3 px-1">
-                    <div>
-                      <label className="text-sm font-medium">Degree</label>
-                      <input
-                        type="text"
-                        className="w-full mt-1 px-3 py-2 border rounded-md bg-background text-sm"
-                        value={edu.degree}
-                        readOnly
-                      />
+                    <div className="space-y-1.5">
+                      <Label>Degree</Label>
+                      <Input type="text" value={edu.degree} readOnly />
                     </div>
-                    <div>
-                      <label className="text-sm font-medium">School</label>
-                      <input
-                        type="text"
-                        className="w-full mt-1 px-3 py-2 border rounded-md bg-background text-sm"
-                        value={edu.school}
-                        readOnly
-                      />
+                    <div className="space-y-1.5">
+                      <Label>School</Label>
+                      <Input type="text" value={edu.school} readOnly />
                     </div>
                     {edu.gpa && (
-                      <div>
-                        <label className="text-sm font-medium">GPA</label>
-                        <input
-                          type="text"
-                          className="w-full mt-1 px-3 py-2 border rounded-md bg-background text-sm"
-                          value={edu.gpa}
-                          readOnly
-                        />
+                      <div className="space-y-1.5">
+                        <Label>GPA</Label>
+                        <Input type="text" value={edu.gpa} readOnly />
                       </div>
                     )}
                   </AccordionContent>
@@ -287,36 +258,20 @@ export function EditorPanel() {
                     </div>
                   </AccordionTrigger>
                   <AccordionContent className="space-y-3 px-1">
-                    <div>
-                      <label className="text-sm font-medium">Name</label>
-                      <input
-                        type="text"
-                        className="w-full mt-1 px-3 py-2 border rounded-md bg-background text-sm"
-                        value={project.name}
-                        readOnly
-                      />
+                    <div className="space-y-1.5">
+                      <Label>Name</Label>
+                      <Input type="text" value={project.name} readOnly />
                     </div>
                     {project.description && (
-                      <div>
-                        <label className="text-sm font-medium">
-                          Description
-                        </label>
-                        <textarea
-                          className="w-full mt-1 px-3 py-2 border rounded-md bg-background text-sm"
-                          value={project.description}
-                          readOnly
-                        />
+                      <div className="space-y-1.5">
+                        <Label>Description</Label>
+                        <Textarea value={project.description} readOnly />
                       </div>
                     )}
                     {project.url && (
-                      <div>
-                        <label className="text-sm font-medium">URL</label>
-                        <input
-                          type="url"
-                          className="w-full mt-1 px-3 py-2 border rounded-md bg-background text-sm"
-                          value={project.url}
-                          readOnly
-                        />
+                      <div className="space-y-1.5">
+                        <Label>URL</Label>
+                        <Input type="url" value={project.url} readOnly />
                       </div>
                     )}
                   </AccordionContent>
