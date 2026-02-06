@@ -62,6 +62,17 @@ export default function Home() {
                 View Templates
               </Button>
             </div>
+            <div className="mt-8 text-sm text-slate-500 dark:text-slate-500">
+              Built by{" "}
+              <a
+                href="https://chirag.codes"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-primary transition-colors"
+              >
+                Chirag Bhalotia
+              </a>
+            </div>
           </div>
 
           {/* Hero Preview */}
@@ -256,9 +267,23 @@ export default function Home() {
               <FileText className="h-5 w-5 text-primary" />
               <span className="font-semibold text-white">ResumeBuilder</span>
             </div>
-            <p className="text-sm">
-              © {new Date().getFullYear()} ResumeBuilder. All rights reserved.
-            </p>
+            <div className="flex flex-col sm:flex-row items-center gap-4 text-sm">
+              <p>© {new Date().getFullYear()} ResumeBuilder.</p>
+              <p className="hidden sm:block text-slate-700 dark:text-slate-600">
+                |
+              </p>
+              <p>
+                Built by{" "}
+                <a
+                  href="https://chirag.codes"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-slate-900 dark:text-slate-200 hover:underline"
+                >
+                  Chirag Bhalotia
+                </a>
+              </p>
+            </div>
           </div>
         </div>
       </footer>

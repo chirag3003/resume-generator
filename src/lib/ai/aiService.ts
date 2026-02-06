@@ -4,8 +4,8 @@ import OpenAI from "openai";
 import type { AISettings } from "@/lib/store/useAISettingsStore";
 import type { ResumeData } from "../schema";
 import {
-  FULL_RESUME_PROMPT,
   CHAT_EDIT_PROMPT,
+  FULL_RESUME_PROMPT,
 } from "./prompts";
 
 export type AIModel =
