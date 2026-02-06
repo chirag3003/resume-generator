@@ -132,6 +132,8 @@ export function AISettingsForm({ onSave, onCancel }: AISettingsFormProps) {
                   <SelectItem value="gpt-4o">GPT-4o</SelectItem>
                   <SelectItem value="gpt-4o-mini">GPT-4o Mini</SelectItem>
                   <SelectItem value="gpt-4-turbo">GPT-4 Turbo</SelectItem>
+                  <SelectItem value="o1-preview">o1-preview</SelectItem>
+                  <SelectItem value="o1-mini">o1-mini</SelectItem>
                 </>
               )}
               {settings.selectedProvider === "google" && (
@@ -139,13 +141,22 @@ export function AISettingsForm({ onSave, onCancel }: AISettingsFormProps) {
                   <SelectItem value="gemini-1.5-flash">
                     Gemini 1.5 Flash
                   </SelectItem>
+                  <SelectItem value="gemini-1.5-flash-002">
+                    Gemini 1.5 Flash-002
+                  </SelectItem>
                   <SelectItem value="gemini-1.5-pro">Gemini 1.5 Pro</SelectItem>
+                  <SelectItem value="gemini-1.5-pro-002">
+                    Gemini 1.5 Pro-002
+                  </SelectItem>
                 </>
               )}
               {settings.selectedProvider === "anthropic" && (
                 <>
                   <SelectItem value="claude-3-haiku-20240307">
                     Claude 3 Haiku
+                  </SelectItem>
+                  <SelectItem value="claude-3-5-haiku-20241022">
+                    Claude 3.5 Haiku
                   </SelectItem>
                   <SelectItem value="claude-3-5-sonnet-20240620">
                     Claude 3.5 Sonnet
