@@ -6,6 +6,10 @@ export interface SavedResume {
     id: string;
     name: string;
     data: ResumeData;
+    settings: {
+        template: string;
+        // Future: themeColor, font, etc.
+    };
     createdAt: string;
     updatedAt: string;
 }
@@ -17,7 +21,7 @@ interface DashboardStore {
     // Actions
     createResume: (name: string) => string;
     deleteResume: (id: string) => void;
-    updateResume: (id: string, data: ResumeData) => void;
+    updateResume: (id: string, data: ResumeData, settings?: { template: string }) => void;
     renameResume: (id: string, name: string) => void;
     setActiveResume: (id: string | null) => void;
     getActiveResume: () => SavedResume | null;
@@ -57,6 +61,9 @@ export const useDashboardStore = create<DashboardStore>()(
                     id,
                     name,
                     data: createEmptyResume(),
+                    settings: {
+                        template: "classic",
+                    },
                     createdAt: now,
                     updatedAt: now,
                 };
@@ -74,11 +81,16 @@ export const useDashboardStore = create<DashboardStore>()(
                 }));
             },
 
-            updateResume: (id: string, data: ResumeData) => {
+            updateResume: (id: string, data: ResumeData, settings?: { template: string }) => {
                 set((state) => ({
                     resumes: state.resumes.map((r) =>
                         r.id === id
-                            ? { ...r, data, updatedAt: new Date().toISOString() }
+                            ? {
+                                ...r,
+                                data,
+                                settings: settings ? { ...r.settings, ...settings } : r.settings,
+                                updatedAt: new Date().toISOString()
+                            }
                             : r
                     ),
                 }));
@@ -114,6 +126,7 @@ export const useDashboardStore = create<DashboardStore>()(
                     id: newId,
                     name: `${original.name} (Copy)`,
                     data: JSON.parse(JSON.stringify(original.data)),
+                    settings: { ...original.settings },
                     createdAt: now,
                     updatedAt: now,
                 };

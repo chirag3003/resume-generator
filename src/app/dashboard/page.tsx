@@ -34,7 +34,7 @@ function ResumeCard({ resume }: { resume: SavedResume }) {
 
   const handleOpen = () => {
     setActiveResume(resume.id);
-    router.push("/builder");
+    router.push(`/builder/${resume.id}`);
   };
 
   const handleDelete = (e: React.MouseEvent) => {
@@ -164,10 +164,10 @@ function CreateResumeDialog() {
 
   const handleCreate = () => {
     if (!name.trim()) return;
-    createResume(name.trim());
+    const id = createResume(name.trim());
     setName("");
     setOpen(false);
-    router.push("/builder");
+    router.push(`/builder/${id}`);
   };
 
   return (
