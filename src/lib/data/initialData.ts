@@ -6,7 +6,8 @@ export const initialResumeData: ResumeData = {
         email: "john.doe@email.com",
         phone: "+1 (555) 123-4567",
         location: "San Francisco, CA",
-        linkedin: "https://linkedin.com/in/johndoe",
+        linkedin: "linkedin.com/in/johndoe",
+        github: "github.com/johndoe",
         website: "https://johndoe.dev",
         summary:
             "Senior Software Engineer with 8+ years of experience building scalable web applications. Passionate about clean code, developer experience, and mentoring teams.",

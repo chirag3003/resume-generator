@@ -132,14 +132,33 @@ export function ResumePDFDocument({ data }: ResumePDFDocumentProps) {
               <Text style={styles.contactItem}>• {personalInfo.location}</Text>
             )}
             {personalInfo.linkedin && (
-              <Link src={personalInfo.linkedin} style={styles.link}>
-                <Text style={styles.contactItem}>• LinkedIn</Text>
-              </Link>
+              <Text style={styles.contactItem}>
+                •{" "}
+                {personalInfo.linkedin
+                  .replace("https://", "")
+                  .replace("http://", "")}
+              </Text>
+            )}
+            {personalInfo.github && (
+              <Text style={styles.contactItem}>
+                •{" "}
+                {personalInfo.github
+                  .replace("https://", "")
+                  .replace("http://", "")}
+              </Text>
+            )}
+            {personalInfo.portfolio && (
+              <Text style={styles.contactItem}>
+                •{" "}
+                {personalInfo.portfolio
+                  .replace("https://", "")
+                  .replace("http://", "")}
+              </Text>
             )}
             {personalInfo.website && (
-              <Link src={personalInfo.website} style={styles.link}>
-                <Text style={styles.contactItem}>• Website</Text>
-              </Link>
+              <Text style={styles.contactItem}>
+                • {personalInfo.website.replace("https://", "")}
+              </Text>
             )}
           </View>
           {personalInfo.summary && (

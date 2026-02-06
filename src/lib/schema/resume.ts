@@ -6,7 +6,9 @@ export const PersonalInfoSchema = z.object({
     email: z.email("Invalid email address"),
     phone: z.string().optional(),
     location: z.string().optional(),
-    linkedin: z.url().optional(),
+    linkedin: z.string().optional(), // URL or username
+    github: z.string().optional(),   // URL or username
+    portfolio: z.string().optional(), // URL or username (Dribbble, Behance, etc.)
     website: z.url().optional(),
     summary: z.string().optional(),
 });

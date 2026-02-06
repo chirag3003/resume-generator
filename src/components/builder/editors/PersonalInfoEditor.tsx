@@ -53,9 +53,30 @@ export function PersonalInfoEditor() {
           <Label htmlFor="linkedin">LinkedIn</Label>
           <Input
             id="linkedin"
-            type="url"
+            type="text"
+            placeholder="linkedin.com/in/username"
             value={personalInfo.linkedin || ""}
             onChange={(e) => updatePersonalInfo("linkedin", e.target.value)}
+          />
+        </div>
+        <div className="space-y-1.5">
+          <Label htmlFor="github">GitHub</Label>
+          <Input
+            id="github"
+            type="text"
+            placeholder="github.com/username"
+            value={personalInfo.github || ""}
+            onChange={(e) => updatePersonalInfo("github", e.target.value)}
+          />
+        </div>
+        <div className="space-y-1.5">
+          <Label htmlFor="portfolio">Portfolio / Dribbble</Label>
+          <Input
+            id="portfolio"
+            type="text"
+            placeholder="dribbble.com/username or behance.net/username"
+            value={personalInfo.portfolio || ""}
+            onChange={(e) => updatePersonalInfo("portfolio", e.target.value)}
           />
         </div>
         <div className="space-y-1.5">

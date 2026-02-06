@@ -33,7 +33,31 @@ export function ClassicATSTemplate({ data }: ClassicATSTemplateProps) {
           {personalInfo.linkedin && (
             <>
               <span className="text-gray-400">|</span>
-              <span>{personalInfo.linkedin.replace("https://", "")}</span>
+              <span>
+                {personalInfo.linkedin
+                  .replace("https://", "")
+                  .replace("http://", "")}
+              </span>
+            </>
+          )}
+          {personalInfo.github && (
+            <>
+              <span className="text-gray-400">|</span>
+              <span>
+                {personalInfo.github
+                  .replace("https://", "")
+                  .replace("http://", "")}
+              </span>
+            </>
+          )}
+          {personalInfo.portfolio && (
+            <>
+              <span className="text-gray-400">|</span>
+              <span>
+                {personalInfo.portfolio
+                  .replace("https://", "")
+                  .replace("http://", "")}
+              </span>
             </>
           )}
           {personalInfo.website && (
