@@ -2,6 +2,7 @@
 
 import { Download, Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import type { ResumeData } from "@/lib/schema";
 import { useResumeStore } from "@/lib/store/useResumeStore";
@@ -62,6 +63,7 @@ export function PDFDownloadButton({ data }: PDFDownloadButtonProps) {
       URL.revokeObjectURL(url);
     } catch (error) {
       console.error("PDF generation failed:", error);
+      toast.error("Failed to generate PDF. Please try again.");
     } finally {
       setIsLoading(false);
     }

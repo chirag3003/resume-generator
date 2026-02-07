@@ -1,13 +1,21 @@
 "use client";
 
-import { ArrowLeft, Eye, FileText, Loader2, PenSquare } from "lucide-react";
+import {
+  ArrowLeft,
+  Check,
+  Eye,
+  FileText,
+  Loader2,
+  PenSquare,
+} from "lucide-react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { EditorPanel } from "@/components/builder/EditorPanel";
 import { PreviewPanel } from "@/components/builder/PreviewPanel";
 import { ChatPanel } from "@/components/builder/ChatPanel";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useDashboardStore } from "@/lib/store/useDashboardStore";
 import { useResumeStore } from "@/lib/store/useResumeStore";
 
@@ -18,11 +26,13 @@ export default function BuilderPage() {
 
   const { resumeData, setResumeData, activeTemplate, setActiveTemplate } =
     useResumeStore();
-  const { resumes, updateResume } = useDashboardStore();
+  const { resumes, updateResume, renameResume } = useDashboardStore();
 
   const [mobileView, setMobileView] = useState<"editor" | "preview">("editor");
   const [isHydrated, setIsHydrated] = useState(false);
   const [isValidating, setIsValidating] = useState(true);
+  const [isEditingName, setIsEditingName] = useState(false);
+  const [editedName, setEditedName] = useState("");
 
   const initializedIdRef = useRef<string | null>(null);
 
@@ -52,8 +62,44 @@ export default function BuilderPage() {
     }
   }, [resumeData, activeTemplate, id, updateResume, isHydrated, isValidating]);
 
+  // Beforeunload warning
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = "";
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, []);
+
   // Derive active resume for display
   const activeResume = resumes.find((r) => r.id === id);
+
+  // Handle inline rename
+  const handleStartRename = useCallback(() => {
+    if (activeResume) {
+      setEditedName(activeResume.name);
+      setIsEditingName(true);
+    }
+  }, [activeResume]);
+
+  const handleConfirmRename = useCallback(() => {
+    if (id && editedName.trim()) {
+      renameResume(id, editedName.trim());
+      setIsEditingName(false);
+    }
+  }, [id, editedName, renameResume]);
+
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === "Enter") {
+        handleConfirmRename();
+      } else if (e.key === "Escape") {
+        setIsEditingName(false);
+      }
+    },
+    [handleConfirmRename],
+  );
 
   if (!isHydrated || isValidating) {
     return (
@@ -77,9 +123,35 @@ export default function BuilderPage() {
           </Link>
           <div className="flex items-center gap-2">
             <FileText className="h-5 w-5 text-primary" />
-            <span className="font-medium truncate max-w-[200px]">
-              {activeResume.name}
-            </span>
+            {isEditingName ? (
+              <div className="flex items-center gap-1">
+                <Input
+                  value={editedName}
+                  onChange={(e) => setEditedName(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  onBlur={handleConfirmRename}
+                  className="h-7 w-[180px] text-sm font-medium"
+                  autoFocus
+                />
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-7 w-7"
+                  onClick={handleConfirmRename}
+                >
+                  <Check className="h-4 w-4" />
+                </Button>
+              </div>
+            ) : (
+              <button
+                type="button"
+                className="font-medium truncate max-w-[200px] cursor-pointer hover:text-primary transition-colors text-left"
+                onClick={handleStartRename}
+                title="Click to rename"
+              >
+                {activeResume.name}
+              </button>
+            )}
           </div>
         </div>
 

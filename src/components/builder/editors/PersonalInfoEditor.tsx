@@ -223,6 +223,14 @@ export function PersonalInfoEditor() {
             onChange={(e) => updatePersonalInfo("summary", e.target.value)}
             placeholder="Write a brief summary of your professional background..."
           />
+          <div className="flex justify-between text-xs text-muted-foreground">
+            <span>Recommended: 50-200 characters for ATS optimization</span>
+            <span
+              className={`${(personalInfo.summary?.length || 0) > 200 ? "text-amber-500" : ""}`}
+            >
+              {personalInfo.summary?.length || 0} characters
+            </span>
+          </div>
         </div>
       </div>
 

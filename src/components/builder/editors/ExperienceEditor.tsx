@@ -28,6 +28,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Dialog,
   DialogContent,
@@ -167,9 +168,32 @@ function SortableExperienceItem({
                 onChange={(e) =>
                   updateExperience(exp.id, { endDate: e.target.value })
                 }
-                placeholder="Present"
+                placeholder="e.g. Dec 2023"
+                disabled={!exp.endDate && exp.endDate === ""}
               />
             </div>
+          </div>
+          <div className="flex items-center space-x-2">
+            <Checkbox
+              id={`current-${exp.id}`}
+              checked={exp.endDate === ""}
+              onCheckedChange={(checked) =>
+                updateExperience(exp.id, {
+                  endDate: checked
+                    ? ""
+                    : new Date().toLocaleDateString("en-US", {
+                        month: "short",
+                        year: "numeric",
+                      }),
+                })
+              }
+            />
+            <label
+              htmlFor={`current-${exp.id}`}
+              className="text-sm font-medium leading-none cursor-pointer peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              I currently work here
+            </label>
           </div>
           <Separator />
           <div className="space-y-2">
