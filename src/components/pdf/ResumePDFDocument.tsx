@@ -27,25 +27,28 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 20,
     fontWeight: "bold",
-    marginBottom: 4,
+    marginBottom: 8,
     fontFamily: "Helvetica-Bold",
   },
   contactInfo: {
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "center",
-    gap: 8,
+    alignItems: "center",
     fontSize: 9,
     color: "#4b5563",
   },
   contactItem: {
-    marginHorizontal: 4,
+    marginRight: 4,
   },
-  summary: {
+  separator: {
+    marginHorizontal: 4,
+    color: "#9ca3af",
+  },
+  summaryText: {
     fontSize: 9,
     color: "#374151",
-    marginTop: 8,
-    textAlign: "center",
+    lineHeight: 1.5,
   },
   section: {
     marginTop: 12,
@@ -124,47 +127,69 @@ export function ResumePDFDocument({ data }: ResumePDFDocumentProps) {
         <View style={styles.header}>
           <Text style={styles.name}>{personalInfo.fullName}</Text>
           <View style={styles.contactInfo}>
-            <Text style={styles.contactItem}>{personalInfo.email}</Text>
+            {personalInfo.email && (
+              <Text style={styles.contactItem}>{personalInfo.email}</Text>
+            )}
             {personalInfo.phone && (
-              <Text style={styles.contactItem}>| {personalInfo.phone}</Text>
+              <>
+                <Text style={styles.separator}>|</Text>
+                <Text style={styles.contactItem}>{personalInfo.phone}</Text>
+              </>
             )}
             {personalInfo.location && (
-              <Text style={styles.contactItem}>| {personalInfo.location}</Text>
+              <>
+                <Text style={styles.separator}>|</Text>
+                <Text style={styles.contactItem}>{personalInfo.location}</Text>
+              </>
             )}
             {personalInfo.linkedin && (
-              <Text style={styles.contactItem}>
-                |{" "}
-                {personalInfo.linkedin
-                  .replace("https://", "")
-                  .replace("http://", "")}
-              </Text>
+              <>
+                <Text style={styles.separator}>|</Text>
+                <Text style={styles.contactItem}>
+                  {personalInfo.linkedin
+                    .replace("https://", "")
+                    .replace("http://", "")}
+                </Text>
+              </>
             )}
             {personalInfo.github && (
-              <Text style={styles.contactItem}>
-                |{" "}
-                {personalInfo.github
-                  .replace("https://", "")
-                  .replace("http://", "")}
-              </Text>
+              <>
+                <Text style={styles.separator}>|</Text>
+                <Text style={styles.contactItem}>
+                  {personalInfo.github
+                    .replace("https://", "")
+                    .replace("http://", "")}
+                </Text>
+              </>
             )}
             {personalInfo.portfolio && (
-              <Text style={styles.contactItem}>
-                |{" "}
-                {personalInfo.portfolio
-                  .replace("https://", "")
-                  .replace("http://", "")}
-              </Text>
+              <>
+                <Text style={styles.separator}>|</Text>
+                <Text style={styles.contactItem}>
+                  {personalInfo.portfolio
+                    .replace("https://", "")
+                    .replace("http://", "")}
+                </Text>
+              </>
             )}
             {personalInfo.website && (
-              <Text style={styles.contactItem}>
-                | {personalInfo.website.replace("https://", "")}
-              </Text>
+              <>
+                <Text style={styles.separator}>|</Text>
+                <Text style={styles.contactItem}>
+                  {personalInfo.website.replace("https://", "")}
+                </Text>
+              </>
             )}
           </View>
-          {personalInfo.summary && (
-            <Text style={styles.summary}>{personalInfo.summary}</Text>
-          )}
         </View>
+
+        {/* Summary */}
+        {personalInfo.summary && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>SUMMARY</Text>
+            <Text style={styles.summaryText}>{personalInfo.summary}</Text>
+          </View>
+        )}
 
         {/* Experience */}
         {experience.length > 0 && (
