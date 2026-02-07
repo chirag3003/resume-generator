@@ -1,21 +1,25 @@
 "use client";
 
 import {
+  AlertTriangle,
   ArrowLeft,
   Check,
   Eye,
   FileText,
   Loader2,
   PenSquare,
+  Sparkles,
 } from "lucide-react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { AISettingsDialog } from "@/components/builder/AISettingsDialog";
 import { EditorPanel } from "@/components/builder/EditorPanel";
 import { PreviewPanel } from "@/components/builder/PreviewPanel";
 import { ChatPanel } from "@/components/builder/ChatPanel";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useAISettingsStore } from "@/lib/store/useAISettingsStore";
 import { useDashboardStore } from "@/lib/store/useDashboardStore";
 import { useResumeStore } from "@/lib/store/useResumeStore";
 
@@ -27,6 +31,9 @@ export default function BuilderPage() {
   const { resumeData, setResumeData, activeTemplate, setActiveTemplate } =
     useResumeStore();
   const { resumes, updateResume, renameResume } = useDashboardStore();
+  const aiSettings = useAISettingsStore();
+
+  const hasAIKey = aiSettings.hasKey(aiSettings.selectedProvider);
 
   const [mobileView, setMobileView] = useState<"editor" | "preview">("editor");
   const [isHydrated, setIsHydrated] = useState(false);
@@ -171,6 +178,27 @@ export default function BuilderPage() {
           >
             <Eye className="h-4 w-4" />
           </Button>
+        </div>
+
+        {/* AI Model Indicator */}
+        <div className="hidden lg:flex items-center gap-2">
+          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-xs font-medium">
+            {hasAIKey ? (
+              <Sparkles className="h-3 w-3 text-yellow-500" />
+            ) : (
+              <AlertTriangle className="h-3 w-3 text-amber-500" />
+            )}
+            <span className="text-muted-foreground">
+              {aiSettings.selectedProvider === "openai" && "OpenAI"}
+              {aiSettings.selectedProvider === "google" && "Gemini"}
+              {aiSettings.selectedProvider === "anthropic" && "Claude"}
+            </span>
+            <span className="hidden sm:inline">
+              {aiSettings.selectedModel?.split("-").slice(0, 2).join("-") ||
+                "default"}
+            </span>
+          </div>
+          <AISettingsDialog />
         </div>
       </div>
 

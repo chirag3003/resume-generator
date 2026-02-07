@@ -1,45 +1,20 @@
 /** biome-ignore-all lint/a11y/useSemanticElements: <not needed> */
 "use client";
 
-import {
-  Copy,
-  FileText,
-  Loader2,
-  MoreVertical,
-  Plus,
-  Sparkles,
-  Trash2,
-} from "lucide-react";
+import { Copy, FileText, MoreVertical, Plus, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { generateFullResume } from "@/lib/ai/aiService";
-import { useAISettingsStore } from "@/lib/store/useAISettingsStore";
 import {
   type SavedResume,
   useDashboardStore,
 } from "@/lib/store/useDashboardStore";
-import { useUserProfileStore } from "@/lib/store/useUserProfileStore";
 
 function ResumeCard({ resume }: { resume: SavedResume }) {
   const router = useRouter();
@@ -170,147 +145,23 @@ function ResumeCard({ resume }: { resume: SavedResume }) {
   );
 }
 
-function CreateResumeDialog() {
-  const [open, setOpen] = useState(false);
-  const [name, setName] = useState("");
-  const [prompt, setPrompt] = useState("");
-  const [isGenerating, setIsGenerating] = useState(false);
-
-  const router = useRouter();
-  const { createResume, updateResume } = useDashboardStore();
-  const settings = useAISettingsStore();
-  const { profile, context } = useUserProfileStore();
-
-  const handleCreate = async () => {
-    if (!name.trim()) return;
-
-    if (prompt.trim()) {
-      // AI Generation Flow
-      const provider = settings.selectedProvider;
-      if (!settings.hasKey(provider)) {
-        toast.error(
-          `Please configure your ${provider} API key in settings first.`,
-        );
-        return;
-      }
-
-      setIsGenerating(true);
-      try {
-        // 1. Generate full resume JSON
-        const generatedData = await generateFullResume({
-          prompt: prompt.trim(),
-          settings,
-          context,
-          profile,
-        });
-
-        // 2. Create resume container
-        const id = createResume(name.trim());
-
-        // 3. Update with generated data
-        updateResume(id, generatedData);
-
-        // 4. Navigate
-        toast.success("Resume generated successfully!");
-        setOpen(false);
-        setPrompt("");
-        setName("");
-        router.push(`/builder/${id}`);
-      } catch (error) {
-        console.error(error);
-        toast.error("Failed to generate resume. Please try again.");
-      } finally {
-        setIsGenerating(false);
-      }
-    } else {
-      // Standard Flow
-      const id = createResume(name.trim());
-      setName("");
-      setOpen(false);
-      router.push(`/builder/${id}`);
-    }
-  };
-
+function CreateResumeCard() {
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <div className="group relative bg-slate-50 dark:bg-slate-800/50 rounded-xl border-2 border-dashed border-slate-300 dark:border-slate-600 overflow-hidden cursor-pointer hover:border-primary/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200">
-          <div className="aspect-[8.5/11] flex flex-col items-center justify-center text-slate-400 dark:text-slate-500">
-            <div className="w-16 h-16 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center mb-4 group-hover:bg-primary/10 transition-colors">
-              <Plus className="h-8 w-8 group-hover:text-primary transition-colors" />
-            </div>
-            <span className="font-medium text-slate-600 dark:text-slate-400">
-              Create New Resume
-            </span>
+    <Link href="/create">
+      <div className="group relative bg-slate-50 dark:bg-slate-800/50 rounded-xl border-2 border-dashed border-slate-300 dark:border-slate-600 overflow-hidden cursor-pointer hover:border-primary/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200">
+        <div className="aspect-[8.5/11] flex flex-col items-center justify-center text-slate-400 dark:text-slate-500">
+          <div className="w-16 h-16 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center mb-4 group-hover:bg-primary/10 transition-colors">
+            <Plus className="h-8 w-8 group-hover:text-primary transition-colors" />
           </div>
-          <div className="p-4 border-t border-slate-200 dark:border-slate-700">
-            <div className="h-6" />
-          </div>
+          <span className="font-medium text-slate-600 dark:text-slate-400">
+            Create New Resume
+          </span>
         </div>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle>Create New Resume</DialogTitle>
-          <DialogDescription>
-            Give your resume a name and optionally provide a prompt to
-            auto-generate content.
-          </DialogDescription>
-        </DialogHeader>
-        <div className="py-4 space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="resume-name">Resume Name *</Label>
-            <Input
-              id="resume-name"
-              placeholder="e.g., Software Engineer Resume"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="mt-2"
-            />
-          </div>
-
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <Label htmlFor="resume-prompt">Starter Prompt (Optional)</Label>
-              <Sparkles className="h-3 w-3 text-yellow-500" />
-            </div>
-            <Textarea
-              id="resume-prompt"
-              placeholder="e.g., Senior Frontend Developer with 5 years experience in React and TypeScript. Focus on performance optimization."
-              value={prompt}
-              onChange={(e) => setPrompt(e.target.value)}
-              className="h-24 resize-none"
-            />
-            <p className="text-xs text-muted-foreground">
-              We'll use your profile details and global context to fill in the
-              rest.
-            </p>
-          </div>
+        <div className="p-4 border-t border-slate-200 dark:border-slate-700">
+          <div className="h-6" />
         </div>
-        <DialogFooter>
-          <Button variant="outline" onClick={() => setOpen(false)}>
-            Cancel
-          </Button>
-          <Button
-            onClick={handleCreate}
-            disabled={!name.trim() || isGenerating}
-          >
-            {isGenerating ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Generating...
-              </>
-            ) : prompt.trim() ? (
-              <>
-                <Sparkles className="mr-2 h-4 w-4" />
-                Generate & Create
-              </>
-            ) : (
-              "Create Empty"
-            )}
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+      </div>
+    </Link>
   );
 }
 
@@ -358,7 +209,7 @@ export default function DashboardPage() {
 
         {/* Resume Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          <CreateResumeDialog />
+          <CreateResumeCard />
           {resumes.map((resume) => (
             <ResumeCard key={resume.id} resume={resume} />
           ))}
