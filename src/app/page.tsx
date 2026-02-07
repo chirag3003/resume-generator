@@ -1,8 +1,10 @@
 import {
   ArrowRight,
-  CheckCircle2,
+  Code2,
   Download,
   FileText,
+  Github,
+  Heart,
   Palette,
   Shield,
   Sparkles,
@@ -22,123 +24,119 @@ export default function Home() {
               <FileText className="h-6 w-6 text-primary" />
               <span className="font-bold text-xl">ResumeBuilder</span>
             </div>
-            <Link href="/dashboard">
-              <Button>Get Started</Button>
-            </Link>
+            <div className="flex items-center gap-3">
+              <a
+                href="https://github.com/chirag3003/resume-generator"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="ghost" size="icon">
+                  <Github className="h-5 w-5" />
+                </Button>
+              </a>
+              <Link href="/dashboard">
+                <Button>Get Started</Button>
+              </Link>
+            </div>
           </div>
         </div>
       </nav>
+
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-4xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-medium mb-8">
-              <Sparkles className="h-4 w-4" />
-              Free & ATS-Optimized
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-100 dark:bg-amber-900/30 rounded-full text-amber-800 dark:text-amber-200 text-sm font-medium mb-8">
+              <Heart className="h-4 w-4" />
+              Open Source Hobby Project
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 dark:text-white mb-6">
-              Create a Professional Resume in{" "}
+              A Simple Resume Builder{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-600">
-                Minutes
+                For Developers
               </span>
             </h1>
             <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-10">
-              Build stunning, ATS-friendly resumes with our intuitive editor.
-              Choose from beautiful templates and download as PDF instantly.
+              Build clean, professional resumes without the bloat. This is a
+              free, open-source tool built as a side project to help job seekers
+              create simple ATS-friendly resumes.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link href="/dashboard">
                 <Button size="lg" className="gap-2 text-lg px-8 py-6">
-                  Start Building Free
+                  Start Building
                   <ArrowRight className="h-5 w-5" />
                 </Button>
               </Link>
-              <Button
-                variant="outline"
-                size="lg"
-                className="gap-2 text-lg px-8 py-6"
-              >
-                View Templates
-              </Button>
-            </div>
-            <div className="mt-8 text-sm font-medium text-slate-900 dark:text-slate-200">
-              Built by{" "}
               <a
-                href="https://chirag.codes"
+                href="https://github.com/chirag3003/resume-generator"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="underline hover:text-primary transition-colors"
               >
-                Chirag Bhalotia
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="gap-2 text-lg px-8 py-6"
+                >
+                  <Github className="h-5 w-5" />
+                  View on GitHub
+                </Button>
               </a>
-            </div>
-          </div>
-
-          {/* Hero Preview */}
-          <div className="mt-16 relative">
-            <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-slate-900 to-transparent z-10 pointer-events-none h-32 bottom-0 top-auto" />
-            <div className="bg-slate-100 dark:bg-slate-800 rounded-2xl p-4 sm:p-8 shadow-2xl">
-              <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-                <div className="h-[300px] sm:h-[400px] bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center">
-                  <div className="text-center text-slate-400">
-                    <FileText className="h-16 w-16 mx-auto mb-4 opacity-50" />
-                    <p className="text-sm">Resume Preview</p>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
       </section>
-      {/* Features Section */}
+
+      {/* What This Tool Does */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-900/50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
-              Everything You Need to Stand Out
+              What You Can Do Here
             </h2>
             <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-              Powerful features designed to help you create the perfect resume
+              Simple features that help you create a resume without unnecessary
+              complexity
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                icon: Shield,
-                title: "ATS-Optimized",
-                description:
-                  "Our templates are designed to pass Applicant Tracking Systems with ease.",
-              },
-              {
-                icon: Palette,
-                title: "Beautiful Templates",
-                description:
-                  "Choose from Classic, Modern, and Minimal designs to match your style.",
-              },
-              {
-                icon: Download,
-                title: "Instant PDF Export",
-                description:
-                  "Download your resume as a professional PDF with one click.",
-              },
-              {
-                icon: Zap,
-                title: "Real-Time Preview",
-                description:
-                  "See your changes instantly with our live preview editor.",
-              },
-              {
                 icon: FileText,
-                title: "Drag & Drop",
+                title: "Create Multiple Resumes",
                 description:
-                  "Easily reorder sections and items with intuitive drag and drop.",
+                  "Save different versions for different job applications. All data stays in your browser.",
               },
               {
                 icon: Sparkles,
-                title: "Mobile Friendly",
+                title: "AI-Assisted Content",
                 description:
-                  "Create and edit your resume on any device, anywhere.",
+                  "Bring your own API key (OpenAI, Google, Anthropic) to get help writing resume content.",
+              },
+              {
+                icon: Shield,
+                title: "ATS-Friendly Format",
+                description:
+                  "Clean, simple templates designed to work well with Applicant Tracking Systems.",
+              },
+              {
+                icon: Download,
+                title: "PDF Export",
+                description:
+                  "Download your resume as a PDF ready for job applications.",
+              },
+              {
+                icon: Zap,
+                title: "Live Preview",
+                description:
+                  "See your changes instantly as you type. No page refreshes needed.",
+              },
+              {
+                icon: Palette,
+                title: "Template Options",
+                description:
+                  "Choose between Classic, Modern, or Minimal layouts based on your preference.",
               },
             ].map((feature, index) => (
               <div
@@ -159,63 +157,110 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* Templates Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
-              Choose Your Style
-            </h2>
-            <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-              Three professionally designed templates to fit your needs
-            </p>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Classic ATS",
-                description: "Clean, traditional layout optimized for ATS",
-                color: "from-slate-600 to-slate-800",
-              },
-              {
-                name: "Modern",
-                description: "Bold header with contemporary styling",
-                color: "from-blue-600 to-indigo-700",
-              },
-              {
-                name: "Minimal",
-                description: "Elegant typography with refined spacing",
-                color: "from-violet-500 to-purple-700",
-              },
-            ].map((template, index) => (
-              <div
-                key={index}
-                className="group relative bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
-              >
-                <div
-                  className={`h-48 bg-gradient-to-br ${template.color} flex items-center justify-center`}
-                >
-                  <FileText className="h-16 w-16 text-white/50" />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
-                    {template.name}
-                  </h3>
-                  <p className="text-slate-600 dark:text-slate-400 mb-4">
-                    {template.description}
-                  </p>
-                  <Link href="/builder">
-                    <Button variant="outline" className="w-full">
-                      Use Template
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-            ))}
+      {/* Honest Notes Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-800 dark:to-slate-900 rounded-3xl p-8 sm:p-12">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-6">
+              A Few Honest Notes
+            </h2>
+            <div className="space-y-4 text-slate-600 dark:text-slate-400">
+              <p>
+                <strong className="text-slate-900 dark:text-white">
+                  This is a hobby project.
+                </strong>{" "}
+                I built this to learn and to help people create simple resumes.
+                It's not a commercial product with a support team.
+              </p>
+              <p>
+                <strong className="text-slate-900 dark:text-white">
+                  Your data stays in your browser.
+                </strong>{" "}
+                Nothing is uploaded to any server. This means if you clear your
+                browser data, your resumes will be gone. Export PDFs of
+                important work.
+              </p>
+              <p>
+                <strong className="text-slate-900 dark:text-white">
+                  AI features require your own API key.
+                </strong>{" "}
+                I don't provide AI access—you'll need to bring your own OpenAI,
+                Google, or Anthropic API key. Keys are stored locally in your
+                browser.
+              </p>
+              <p>
+                <strong className="text-slate-900 dark:text-white">
+                  It's open source.
+                </strong>{" "}
+                Found a bug? Want to add a feature? Contributions are welcome on
+                GitHub.
+              </p>
+            </div>
           </div>
         </div>
-      </section>{" "}
+      </section>
+
+      {/* About the Creator */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-900/50">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-6">
+            About the Creator
+          </h2>
+          <div className="flex flex-col items-center">
+            <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-violet-600 rounded-full flex items-center justify-center mb-6">
+              <Code2 className="h-12 w-12 text-white" />
+            </div>
+            <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">
+              Chirag Bhalotia
+            </h3>
+            <p className="text-slate-600 dark:text-slate-400 max-w-lg mb-6">
+              Full-stack developer who enjoys building useful tools. I created
+              this resume builder as a weekend project and decided to share it
+              with others who might find it helpful.
+            </p>
+            <div className="flex items-center gap-4">
+              <a
+                href="https://chirag.codes"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline font-medium"
+              >
+                chirag.codes
+              </a>
+              <span className="text-slate-300 dark:text-slate-700">|</span>
+              <a
+                href="https://github.com/chirag3003"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline font-medium flex items-center gap-1"
+              >
+                <Github className="h-4 w-4" />
+                GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+            Ready to Build Your Resume?
+          </h2>
+          <p className="text-lg text-slate-600 dark:text-slate-400 mb-8">
+            No account needed. Just start building.
+          </p>
+          <Link href="/dashboard">
+            <Button size="lg" className="gap-2 text-lg px-8 py-6">
+              Get Started
+              <ArrowRight className="h-5 w-5" />
+            </Button>
+          </Link>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="py-12 px-4 sm:px-6 lg:px-8 bg-slate-900 text-slate-400">
         <div className="max-w-7xl mx-auto">
@@ -223,12 +268,21 @@ export default function Home() {
             <div className="flex items-center gap-2">
               <FileText className="h-5 w-5 text-primary" />
               <span className="font-semibold text-white">ResumeBuilder</span>
+              <span className="text-xs bg-amber-900/50 text-amber-200 px-2 py-0.5 rounded-full ml-2">
+                Hobby Project
+              </span>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-4 text-sm">
-              <p>© {new Date().getFullYear()} ResumeBuilder.</p>
-              <p className="hidden sm:block text-slate-700 dark:text-slate-600">
-                |
-              </p>
+              <a
+                href="https://github.com/chirag3003/resume-generator"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors flex items-center gap-1"
+              >
+                <Github className="h-4 w-4" />
+                Source Code
+              </a>
+              <span className="hidden sm:block text-slate-700">|</span>
               <p>
                 Built by{" "}
                 <a
