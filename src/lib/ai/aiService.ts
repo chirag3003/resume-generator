@@ -3,10 +3,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import OpenAI from "openai";
 import type { AISettings } from "@/lib/store/useAISettingsStore";
 import type { ResumeData } from "../schema";
-import {
-  CHAT_EDIT_PROMPT,
-  FULL_RESUME_PROMPT,
-} from "./prompts";
+import { CHAT_EDIT_PROMPT, FULL_RESUME_PROMPT } from "./prompts";
 
 export type AIModel =
   | "gpt-4o-mini"

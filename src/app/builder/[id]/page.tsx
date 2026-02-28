@@ -14,9 +14,9 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AISettingsDialog } from "@/components/builder/AISettingsDialog";
+import { ChatPanel } from "@/components/builder/ChatPanel";
 import { EditorPanel } from "@/components/builder/EditorPanel";
 import { PreviewPanel } from "@/components/builder/PreviewPanel";
-import { ChatPanel } from "@/components/builder/ChatPanel";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAISettingsStore } from "@/lib/store/useAISettingsStore";
@@ -119,9 +119,9 @@ export default function BuilderPage() {
   if (!activeResume) return null;
 
   return (
-    <div className="h-screen w-full flex flex-col overflow-hidden text-left">
+    <div className="h-screen w-full flex flex-col overflow-hidden text-left print:h-auto print:overflow-visible print:block">
       {/* Header Bar */}
-      <div className="flex items-center justify-between px-4 py-2 bg-background border-b shrink-0">
+      <div className="flex items-center justify-between px-4 py-2 bg-background border-b shrink-0 print:hidden">
         <div className="flex items-center gap-3">
           <Link href="/dashboard">
             <Button variant="ghost" size="icon">
@@ -203,11 +203,11 @@ export default function BuilderPage() {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
+      <div className="flex-1 flex flex-col lg:flex-row overflow-hidden print:overflow-visible print:block">
         {/* Editor Panel */}
         <div
           className={`
-            lg:w-[35%] lg:min-w-[320px] h-full overflow-hidden
+            lg:w-[35%] lg:min-w-[320px] h-full overflow-hidden print:hidden
             ${mobileView === "editor" ? "flex-1" : "hidden lg:block"}
           `}
         >
@@ -217,7 +217,7 @@ export default function BuilderPage() {
         {/* Preview Panel */}
         <div
           className={`
-            lg:flex-1 h-full overflow-hidden
+            lg:flex-1 h-full overflow-hidden print:overflow-visible print:h-auto print:block
             ${mobileView === "preview" ? "flex-1" : "hidden lg:block"}
           `}
         >
@@ -225,7 +225,7 @@ export default function BuilderPage() {
         </div>
 
         {/* Chat Panel - Desktop: Fixed width on right. Mobile: Hidden for now (future: add toggle) */}
-        <div className="hidden lg:block w-[320px] h-full overflow-hidden shrink-0">
+        <div className="hidden lg:block w-[320px] h-full overflow-hidden shrink-0 print:hidden">
           <ChatPanel resumeId={id} />
         </div>
       </div>

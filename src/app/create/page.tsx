@@ -23,8 +23,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { generateFullResume } from "@/lib/ai/aiService";
-import { DEFAULT_MODELS } from "@/lib/ai/aiService";
+import { DEFAULT_MODELS, generateFullResume } from "@/lib/ai/aiService";
 import {
   type AIProvider,
   useAISettingsStore,

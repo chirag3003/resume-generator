@@ -131,3 +131,30 @@
     line-clamp: 2;
   }
 }
+
+@media print {
+  @page {
+    margin: 0;
+    size: A4;
+  }
+
+  html,
+  body {
+    background-color: transparent !important;
+  }
+
+  #resume-preview-container {
+    transform: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 210mm;
+    min-height: 297mm;
+  }
+
+  /* Force background colors to print for templates */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
