@@ -87,10 +87,10 @@ export function PreviewPanel({ data }: PreviewPanelProps) {
   return (
     <div
       ref={containerRef}
-      className="h-full w-full bg-zinc-100 dark:bg-zinc-900 flex flex-col overflow-hidden"
+      className="h-full w-full bg-zinc-100 dark:bg-zinc-900 flex flex-col overflow-hidden print:bg-transparent print:h-auto print:overflow-visible print:block"
     >
       {/* Controls */}
-      <div className="flex flex-wrap items-center justify-between gap-2 p-2 sm:p-3 bg-background/80 backdrop-blur border-b shrink-0">
+      <div className="flex flex-wrap items-center justify-between gap-2 p-2 sm:p-3 bg-background/80 backdrop-blur border-b shrink-0 print:hidden">
         <div className="flex items-center gap-2 sm:gap-4 flex-wrap">
           <div className="flex items-center gap-1 sm:gap-2">
             <Button
@@ -134,14 +134,15 @@ export function PreviewPanel({ data }: PreviewPanelProps) {
       </div>
 
       {/* Mobile template selector */}
-      <div className="sm:hidden flex justify-center p-2 bg-background/50 border-b">
+      <div className="sm:hidden flex justify-center p-2 bg-background/50 border-b print:hidden">
         <TemplateSelector />
       </div>
 
       {/* Preview area */}
-      <div className="flex-1 overflow-auto flex items-start justify-center p-3 sm:p-6">
+      <div className="flex-1 overflow-auto flex items-start justify-center p-3 sm:p-6 print:p-0 print:overflow-visible print:block">
         <div
-          className="shadow-2xl origin-top"
+          id="resume-preview-container"
+          className="shadow-2xl origin-top print:shadow-none"
           style={{
             transform: `scale(${scale})`,
           }}

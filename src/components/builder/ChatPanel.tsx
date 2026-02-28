@@ -1,14 +1,14 @@
 "use client";
 
+import { Bot, Loader2, Send, Trash2, User } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { Send, Loader2, Bot, User, Trash2 } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { chatEditResume } from "@/lib/ai/aiService";
+import { useAISettingsStore } from "@/lib/store/useAISettingsStore";
 import { useChatStore } from "@/lib/store/useChatStore";
 import { useResumeStore } from "@/lib/store/useResumeStore";
-import { useAISettingsStore } from "@/lib/store/useAISettingsStore";
-import { chatEditResume } from "@/lib/ai/aiService";
-import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 
 const EMPTY_MESSAGES: any[] = []; // Typed as any[] or ChatMessage[] to avoid issues, better to infer or import type if needed but any[] is safe for empty. actually let's use the type from store if possible or just infer.
