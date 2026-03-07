@@ -33,9 +33,13 @@ import { useUserProfileStore } from "@/lib/store/useUserProfileStore";
 
 const MODELS = {
   openai: [
-    { id: "gpt-4o", name: "GPT-4o" },
-    { id: "gpt-4o-mini", name: "GPT-4o Mini" },
-    { id: "gpt-4-turbo", name: "GPT-4 Turbo" },
+    { id: "gpt-5.4", name: "GPT-5.4" },
+    { id: "gpt-5.4-pro", name: "GPT-5.4 Pro" },
+    { id: "gpt-5.2", name: "GPT-5.2" },
+    { id: "gpt-5.1", name: "GPT-5.1" },
+    { id: "gpt-5", name: "GPT-5" },
+    { id: "gpt-5-mini", name: "GPT-5 Mini" },
+    { id: "gpt-5-nano", name: "GPT-5 Nano" },
   ],
   google: [
     { id: "gemini-3-flash-preview", name: "Gemini 3 Flash" },

@@ -6,13 +6,13 @@ import type { ResumeData } from "../schema";
 import { CHAT_EDIT_PROMPT, FULL_RESUME_PROMPT } from "./prompts";
 
 export type AIModel =
-  | "gpt-4o-mini"
+  | "gpt-5-mini"
   | "gemini-3-flash-preview"
   | "claude-3-haiku-20240307";
 
 // Provider-specific default models
 export const DEFAULT_MODELS = {
-  openai: "gpt-4o-mini",
+  openai: "gpt-5-mini",
   google: "gemini-3-flash-preview",
   anthropic: "claude-3-haiku-20240307",
 };

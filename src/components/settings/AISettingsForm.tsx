@@ -129,11 +129,13 @@ export function AISettingsForm({ onSave, onCancel }: AISettingsFormProps) {
             <SelectContent>
               {settings.selectedProvider === "openai" && (
                 <>
-                  <SelectItem value="gpt-4o">GPT-4o</SelectItem>
-                  <SelectItem value="gpt-4o-mini">GPT-4o Mini</SelectItem>
-                  <SelectItem value="gpt-4-turbo">GPT-4 Turbo</SelectItem>
-                  <SelectItem value="o1-preview">o1-preview</SelectItem>
-                  <SelectItem value="o1-mini">o1-mini</SelectItem>
+                  <SelectItem value="gpt-5.4">GPT-5.4</SelectItem>
+                  <SelectItem value="gpt-5.4-pro">GPT-5.4 Pro</SelectItem>
+                  <SelectItem value="gpt-5.2">GPT-5.2</SelectItem>
+                  <SelectItem value="gpt-5.1">GPT-5.1</SelectItem>
+                  <SelectItem value="gpt-5">GPT-5</SelectItem>
+                  <SelectItem value="gpt-5-mini">GPT-5 Mini</SelectItem>
+                  <SelectItem value="gpt-5-nano">GPT-5 Nano</SelectItem>
                 </>
               )}
               {settings.selectedProvider === "google" && (
@@ -182,11 +184,10 @@ export function AISettingsForm({ onSave, onCancel }: AISettingsFormProps) {
 
         {/* OpenAI Key */}
         <div
-          className={`space-y-2 ${
-            settings.selectedProvider !== "openai"
+          className={`space-y-2 ${settings.selectedProvider !== "openai"
               ? "opacity-50 hover:opacity-100 transition-opacity"
               : ""
-          }`}
+            }`}
         >
           <Label
             htmlFor="openai-key"
@@ -211,11 +212,10 @@ export function AISettingsForm({ onSave, onCancel }: AISettingsFormProps) {
 
         {/* Google Key */}
         <div
-          className={`space-y-2 ${
-            settings.selectedProvider !== "google"
+          className={`space-y-2 ${settings.selectedProvider !== "google"
               ? "opacity-50 hover:opacity-100 transition-opacity"
               : ""
-          }`}
+            }`}
         >
           <Label
             htmlFor="google-key"
@@ -240,11 +240,10 @@ export function AISettingsForm({ onSave, onCancel }: AISettingsFormProps) {
 
         {/* Anthropic Key */}
         <div
-          className={`space-y-2 ${
-            settings.selectedProvider !== "anthropic"
+          className={`space-y-2 ${settings.selectedProvider !== "anthropic"
               ? "opacity-50 hover:opacity-100 transition-opacity"
               : ""
-          }`}
+            }`}
         >
           <Label
             htmlFor="anthropic-key"
