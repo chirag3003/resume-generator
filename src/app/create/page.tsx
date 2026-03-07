@@ -23,35 +23,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { DEFAULT_MODELS, generateFullResume } from "@/lib/ai/aiService";
+import { generateFullResume } from "@/lib/ai/aiService";
+import { AI_MODELS, DEFAULT_MODELS } from "@/lib/ai/models";
 import {
   type AIProvider,
   useAISettingsStore,
 } from "@/lib/store/useAISettingsStore";
 import { useDashboardStore } from "@/lib/store/useDashboardStore";
 import { useUserProfileStore } from "@/lib/store/useUserProfileStore";
-
-const MODELS = {
-  openai: [
-    { id: "gpt-5.4", name: "GPT-5.4" },
-    { id: "gpt-5.4-pro", name: "GPT-5.4 Pro" },
-    { id: "gpt-5.2", name: "GPT-5.2" },
-    { id: "gpt-5.1", name: "GPT-5.1" },
-    { id: "gpt-5", name: "GPT-5" },
-    { id: "gpt-5-mini", name: "GPT-5 Mini" },
-    { id: "gpt-5-nano", name: "GPT-5 Nano" },
-  ],
-  google: [
-    { id: "gemini-3-flash-preview", name: "Gemini 3 Flash" },
-    { id: "gemini-3-pro-preview", name: "Gemini 3 Pro" },
-    { id: "gemini-2.5-pro", name: "Gemini 2.5 Pro" },
-  ],
-  anthropic: [
-    { id: "claude-3-5-sonnet-20240620", name: "Claude 3.5 Sonnet" },
-    { id: "claude-3-5-haiku-20241022", name: "Claude 3.5 Haiku" },
-    { id: "claude-3-opus-20240229", name: "Claude 3 Opus" },
-  ],
-};
 
 export default function CreateResumePage() {
   const router = useRouter();
@@ -255,7 +234,7 @@ export default function CreateResumePage() {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    {MODELS[selectedProvider].map((model) => (
+                    {AI_MODELS[selectedProvider].map((model) => (
                       <SelectItem key={model.id} value={model.id}>
                         {model.name}
                       </SelectItem>

@@ -13,7 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { DEFAULT_MODELS } from "@/lib/ai/aiService";
+import { AI_MODELS, DEFAULT_MODELS } from "@/lib/ai/models";
 import {
   type AIProvider,
   useAISettingsStore,
@@ -127,50 +127,11 @@ export function AISettingsForm({ onSave, onCancel }: AISettingsFormProps) {
               <SelectValue placeholder="Select model" />
             </SelectTrigger>
             <SelectContent>
-              {settings.selectedProvider === "openai" && (
-                <>
-                  <SelectItem value="gpt-5.4">GPT-5.4</SelectItem>
-                  <SelectItem value="gpt-5.4-pro">GPT-5.4 Pro</SelectItem>
-                  <SelectItem value="gpt-5.2">GPT-5.2</SelectItem>
-                  <SelectItem value="gpt-5.1">GPT-5.1</SelectItem>
-                  <SelectItem value="gpt-5">GPT-5</SelectItem>
-                  <SelectItem value="gpt-5-mini">GPT-5 Mini</SelectItem>
-                  <SelectItem value="gpt-5-nano">GPT-5 Nano</SelectItem>
-                </>
-              )}
-              {settings.selectedProvider === "google" && (
-                <>
-                  <SelectItem value="gemini-3-flash-preview">
-                    Gemini 3 Flash (Default)
-                  </SelectItem>
-                  <SelectItem value="gemini-3-pro-preview">
-                    Gemini 3 Pro
-                  </SelectItem>
-                  <SelectItem value="gemini-2.5-pro">Gemini 2.5 Pro</SelectItem>
-                  <SelectItem value="gemini-2.5-flash">
-                    Gemini 2.5 Flash
-                  </SelectItem>
-                  <SelectItem value="gemini-2.5-flash-lite">
-                    Gemini 2.5 Flash-Lite
-                  </SelectItem>
-                </>
-              )}
-              {settings.selectedProvider === "anthropic" && (
-                <>
-                  <SelectItem value="claude-3-haiku-20240307">
-                    Claude 3 Haiku
-                  </SelectItem>
-                  <SelectItem value="claude-3-5-haiku-20241022">
-                    Claude 3.5 Haiku
-                  </SelectItem>
-                  <SelectItem value="claude-3-5-sonnet-20240620">
-                    Claude 3.5 Sonnet
-                  </SelectItem>
-                  <SelectItem value="claude-3-opus-20240229">
-                    Claude 3 Opus
-                  </SelectItem>
-                </>
-              )}
+              {AI_MODELS[settings.selectedProvider].map((model) => (
+                <SelectItem key={model.id} value={model.id}>
+                  {model.name}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
         </div>
@@ -184,10 +145,11 @@ export function AISettingsForm({ onSave, onCancel }: AISettingsFormProps) {
 
         {/* OpenAI Key */}
         <div
-          className={`space-y-2 ${settings.selectedProvider !== "openai"
+          className={`space-y-2 ${
+            settings.selectedProvider !== "openai"
               ? "opacity-50 hover:opacity-100 transition-opacity"
               : ""
-            }`}
+          }`}
         >
           <Label
             htmlFor="openai-key"
@@ -212,10 +174,11 @@ export function AISettingsForm({ onSave, onCancel }: AISettingsFormProps) {
 
         {/* Google Key */}
         <div
-          className={`space-y-2 ${settings.selectedProvider !== "google"
+          className={`space-y-2 ${
+            settings.selectedProvider !== "google"
               ? "opacity-50 hover:opacity-100 transition-opacity"
               : ""
-            }`}
+          }`}
         >
           <Label
             htmlFor="google-key"
@@ -240,10 +203,11 @@ export function AISettingsForm({ onSave, onCancel }: AISettingsFormProps) {
 
         {/* Anthropic Key */}
         <div
-          className={`space-y-2 ${settings.selectedProvider !== "anthropic"
+          className={`space-y-2 ${
+            settings.selectedProvider !== "anthropic"
               ? "opacity-50 hover:opacity-100 transition-opacity"
               : ""
-            }`}
+          }`}
         >
           <Label
             htmlFor="anthropic-key"
