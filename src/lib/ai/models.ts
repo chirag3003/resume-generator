@@ -11,10 +11,9 @@ export type AIModel =
   | "gemini-2.5-pro"
   | "gemini-2.5-flash"
   | "gemini-2.5-flash-lite"
-  | "claude-3-haiku-20240307"
-  | "claude-3-5-haiku-20241022"
-  | "claude-3-5-sonnet-20240620"
-  | "claude-3-opus-20240229";
+  | "claude-opus-4-6"
+  | "claude-sonnet-4-6"
+  | "claude-haiku-4-5";
 
 export const AI_MODELS = {
   openai: [
@@ -34,15 +33,14 @@ export const AI_MODELS = {
     { id: "gemini-2.5-flash-lite", name: "Gemini 2.5 Flash-Lite" },
   ],
   anthropic: [
-    { id: "claude-3-5-sonnet-20240620", name: "Claude 3.5 Sonnet" },
-    { id: "claude-3-5-haiku-20241022", name: "Claude 3.5 Haiku" },
-    { id: "claude-3-opus-20240229", name: "Claude 3 Opus" },
-    { id: "claude-3-haiku-20240307", name: "Claude 3 Haiku" },
+    { id: "claude-opus-4-6", name: "Claude Opus 4.6" },
+    { id: "claude-sonnet-4-6", name: "Claude Sonnet 4.6" },
+    { id: "claude-haiku-4-5", name: "Claude Haiku 4.5" },
   ],
 };
 
 export const DEFAULT_MODELS = {
   openai: "gpt-5-mini",
   google: "gemini-3-flash-preview",
-  anthropic: "claude-3-haiku-20240307",
+  anthropic: "claude-haiku-4-5",
 };

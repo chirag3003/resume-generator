@@ -3,8 +3,8 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import OpenAI from "openai";
 import type { AISettings } from "@/lib/store/useAISettingsStore";
 import type { ResumeData } from "../schema";
-import { CHAT_EDIT_PROMPT, FULL_RESUME_PROMPT } from "./prompts";
 import { DEFAULT_MODELS } from "./models";
+import { CHAT_EDIT_PROMPT, FULL_RESUME_PROMPT } from "./prompts";
 
 interface GenerateOptions {
   prompt: string;
