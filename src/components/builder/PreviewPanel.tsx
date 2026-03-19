@@ -4,7 +4,9 @@ import { RotateCcw, ZoomIn, ZoomOut } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ClassicATSTemplate } from "@/components/templates/ClassicATSTemplate";
 import { MinimalTemplate } from "@/components/templates/MinimalTemplate";
+import { ModernSidebarTemplate } from "@/components/templates/ModernSidebarTemplate";
 import { ModernTemplate } from "@/components/templates/ModernTemplate";
+import { TwoColumnTemplate } from "@/components/templates/TwoColumnTemplate";
 import { Button } from "@/components/ui/button";
 import type { ResumeData } from "@/lib/schema";
 import { useResumeStore } from "@/lib/store/useResumeStore";
@@ -79,6 +81,10 @@ export function PreviewPanel({ data }: PreviewPanelProps) {
         return <ModernTemplate data={data} />;
       case "minimal":
         return <MinimalTemplate data={data} />;
+      case "twocolumn":
+        return <TwoColumnTemplate data={data} />;
+      case "modernsidebar":
+        return <ModernSidebarTemplate data={data} />;
       default:
         return <ClassicATSTemplate data={data} />;
     }
@@ -142,11 +148,19 @@ export function PreviewPanel({ data }: PreviewPanelProps) {
       <div className="flex-1 overflow-auto flex items-start justify-center p-3 sm:p-6 print:p-0 print:overflow-visible print:block">
         <div
           id="resume-preview-container"
-          className="shadow-2xl origin-top print:shadow-none"
+          className="shadow-2xl origin-top print:shadow-none relative bg-white"
           style={{
             transform: `scale(${scale})`,
           }}
         >
+          {/* Page boundary indicator for preview */}
+          <div
+            className="absolute inset-0 pointer-events-none print:hidden z-50 mix-blend-multiply"
+            style={{
+              backgroundImage:
+                "repeating-linear-gradient(to bottom, transparent, transparent calc(297mm - 1px), #ef4444 calc(297mm - 1px), #ef4444 297mm)",
+            }}
+          />
           {renderTemplate()}
         </div>
       </div>

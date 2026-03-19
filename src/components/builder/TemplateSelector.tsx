@@ -22,6 +22,16 @@ const templates = [
     description: "Dark header with accent colors",
   },
   { id: "minimal", name: "Minimal", description: "Light, elegant typography" },
+  {
+    id: "twocolumn",
+    name: "Two Column",
+    description: "Professional two-column layout",
+  },
+  {
+    id: "modernsidebar",
+    name: "Modern Sidebar",
+    description: "Creative sidebar with tint",
+  },
 ] as const;
 
 export function TemplateSelector() {

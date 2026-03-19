@@ -10,11 +10,11 @@ export function MinimalTemplate({ data }: MinimalTemplateProps) {
   const { personalInfo, experience, education, skills, projects } = data;
 
   return (
-    <article className="w-[210mm] min-h-[297mm] bg-white text-black p-16 print:p-0 print:pt-12 print:pb-12 font-serif text-sm leading-relaxed">
-      <div className="print:px-16">
+    <article className="w-[210mm] min-h-[297mm] bg-white text-black p-10 print:p-0 font-serif text-sm leading-snug">
+      <div className="print:px-10 print:py-10">
         {/* Header - Ultra minimal */}
-        <header className="mb-8 print:mb-6">
-          <h1 className="text-4xl font-light tracking-wide mb-3">
+        <header className="mb-6 print:mb-4">
+          <h1 className="text-3xl font-light tracking-wide mb-2">
             {personalInfo.fullName}
           </h1>
           <div className="text-xs text-gray-500 space-y-0.5">
@@ -104,8 +104,8 @@ export function MinimalTemplate({ data }: MinimalTemplateProps) {
 
         {/* Summary */}
         {personalInfo.summary && (
-          <section className="mb-8 print:mb-6 print:break-inside-avoid">
-            <p className="text-gray-600 leading-relaxed">
+          <section className="mb-6 print:mb-4 print:break-inside-avoid">
+            <p className="text-gray-600 leading-normal">
               {personalInfo.summary}
             </p>
           </section>
@@ -113,14 +113,14 @@ export function MinimalTemplate({ data }: MinimalTemplateProps) {
 
         {/* Experience */}
         {experience.length > 0 && (
-          <section className="mb-8 print:mb-6">
-            <h2 className="text-xs uppercase tracking-[0.3em] text-gray-400 mb-4 print:break-after-avoid">
+          <section className="mb-6 print:mb-4">
+            <h2 className="text-xs uppercase tracking-[0.3em] text-gray-400 mb-3 print:break-after-avoid">
               Experience
             </h2>
             {experience.map((exp) => (
               <div
                 key={exp.id}
-                className="mb-5 print:mb-4 print:break-inside-avoid"
+                className="mb-4 print:mb-3 print:break-inside-avoid"
               >
                 <div className="flex justify-between items-baseline mb-1">
                   <span className="font-medium text-gray-900">{exp.title}</span>
@@ -151,14 +151,14 @@ export function MinimalTemplate({ data }: MinimalTemplateProps) {
 
         {/* Education */}
         {education.length > 0 && (
-          <section className="mb-8 print:mb-6">
-            <h2 className="text-xs uppercase tracking-[0.3em] text-gray-400 mb-4 print:break-after-avoid">
+          <section className="mb-6 print:mb-4">
+            <h2 className="text-xs uppercase tracking-[0.3em] text-gray-400 mb-3 print:break-after-avoid">
               Education
             </h2>
             {education.map((edu) => (
               <div
                 key={edu.id}
-                className="mb-4 print:mb-3 print:break-inside-avoid"
+                className="mb-3 print:mb-2 print:break-inside-avoid"
               >
                 <div className="flex justify-between items-baseline mb-1">
                   <span className="font-medium text-gray-900">
@@ -180,11 +180,11 @@ export function MinimalTemplate({ data }: MinimalTemplateProps) {
 
         {/* Skills */}
         {skills.length > 0 && (
-          <section className="mb-8 print:mb-6 print:break-inside-avoid">
-            <h2 className="text-xs uppercase tracking-[0.3em] text-gray-400 mb-3">
+          <section className="mb-6 print:mb-4 print:break-inside-avoid">
+            <h2 className="text-xs uppercase tracking-[0.3em] text-gray-400 mb-2">
               Skills
             </h2>
-            <p className="text-gray-600 leading-relaxed">
+            <p className="text-gray-600 leading-normal">
               {skills.map((s) => s.name).join(" · ")}
             </p>
           </section>
@@ -192,14 +192,14 @@ export function MinimalTemplate({ data }: MinimalTemplateProps) {
 
         {/* Projects */}
         {projects.length > 0 && (
-          <section className="mb-8 print:mb-6">
-            <h2 className="text-xs uppercase tracking-[0.3em] text-gray-400 mb-4 print:break-after-avoid">
+          <section className="mb-6 print:mb-4">
+            <h2 className="text-xs uppercase tracking-[0.3em] text-gray-400 mb-3 print:break-after-avoid">
               Projects
             </h2>
             {projects.map((project) => (
               <div
                 key={project.id}
-                className="mb-4 print:mb-3 print:break-inside-avoid"
+                className="mb-3 print:mb-2 print:break-inside-avoid"
               >
                 <div className="flex justify-between items-baseline mb-1">
                   <span className="font-medium text-gray-900">

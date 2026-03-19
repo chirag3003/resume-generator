@@ -100,12 +100,12 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
         </div>
       </header>
 
-      <div className="p-12 pt-8 print:px-16 print:pb-8">
+      <div className="p-8 pt-6 print:px-10 print:pb-6">
         {/* Summary */}
         {personalInfo.summary && (
-          <section className="mb-6 print:break-inside-avoid">
+          <section className="mb-4 print:break-inside-avoid">
             <p
-              className="text-gray-700 italic border-l-4 border-slate-800 pl-4"
+              className="text-gray-700 italic border-l-4 border-slate-800 pl-4 leading-normal"
               style={{
                 WebkitPrintColorAdjust: "exact",
                 printColorAdjust: "exact",
@@ -118,8 +118,8 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
 
         {/* Experience */}
         {experience.length > 0 && (
-          <section className="mb-6">
-            <h2 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2 print:break-after-avoid">
+          <section className="mb-4">
+            <h2 className="text-lg font-bold text-slate-800 mb-2 flex items-center gap-2 print:break-after-avoid">
               <span
                 className="w-8 h-0.5 bg-slate-800"
                 style={{
@@ -130,7 +130,7 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
               Experience
             </h2>
             {experience.map((exp) => (
-              <div key={exp.id} className="mb-4 ml-10 print:break-inside-avoid">
+              <div key={exp.id} className="mb-3 ml-6 print:break-inside-avoid">
                 <div className="flex justify-between items-baseline">
                   <h3 className="font-semibold text-slate-800">{exp.title}</h3>
                   <span
@@ -168,8 +168,8 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
 
         {/* Education */}
         {education.length > 0 && (
-          <section className="mb-6">
-            <h2 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2 print:break-after-avoid">
+          <section className="mb-4">
+            <h2 className="text-lg font-bold text-slate-800 mb-2 flex items-center gap-2 print:break-after-avoid">
               <span
                 className="w-8 h-0.5 bg-slate-800"
                 style={{
@@ -180,7 +180,7 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
               Education
             </h2>
             {education.map((edu) => (
-              <div key={edu.id} className="mb-3 ml-10 print:break-inside-avoid">
+              <div key={edu.id} className="mb-2 ml-6 print:break-inside-avoid">
                 <div className="flex justify-between items-baseline">
                   <h3 className="font-semibold text-slate-800">{edu.degree}</h3>
                   <span className="text-xs text-gray-600 font-medium">
@@ -210,8 +210,8 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
 
         {/* Skills */}
         {skills.length > 0 && (
-          <section className="mb-6 print:break-inside-avoid">
-            <h2 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+          <section className="mb-4 print:break-inside-avoid">
+            <h2 className="text-lg font-bold text-slate-800 mb-2 flex items-center gap-2">
               <span
                 className="w-8 h-0.5 bg-slate-800"
                 style={{
@@ -221,7 +221,7 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
               ></span>
               Skills
             </h2>
-            <div className="flex flex-wrap gap-2 ml-10">
+            <div className="flex flex-wrap gap-2 ml-6">
               {skills.map((skill) => (
                 <span
                   key={skill.id}
@@ -240,8 +240,8 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
 
         {/* Projects */}
         {projects.length > 0 && (
-          <section className="mb-6">
-            <h2 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2 print:break-after-avoid">
+          <section className="mb-4">
+            <h2 className="text-lg font-bold text-slate-800 mb-2 flex items-center gap-2 print:break-after-avoid">
               <span
                 className="w-8 h-0.5 bg-slate-800"
                 style={{
@@ -254,7 +254,7 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
             {projects.map((project) => (
               <div
                 key={project.id}
-                className="mb-3 ml-10 print:break-inside-avoid"
+                className="mb-2 ml-6 print:break-inside-avoid"
               >
                 <div className="flex justify-between items-baseline">
                   <h3 className="font-semibold text-slate-800">

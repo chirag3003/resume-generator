@@ -10,10 +10,10 @@ export function ClassicATSTemplate({ data }: ClassicATSTemplateProps) {
   const { personalInfo, experience, education, skills, projects } = data;
 
   return (
-    <article className="w-[210mm] min-h-[297mm] bg-white text-black p-12 print:p-0 print:pt-8 print:pb-8 font-sans text-sm leading-relaxed">
-      <div className="print:px-12">
+    <article className="w-[210mm] min-h-[297mm] bg-white text-black p-8 print:p-0 font-sans text-sm leading-snug">
+      <div className="print:px-8 print:py-8">
         {/* Header - Personal Info */}
-        <header className="text-center mb-6 border-b border-gray-300 pb-5">
+        <header className="text-center mb-4 border-b border-gray-300 pb-4">
           <h1 className="text-2xl font-bold tracking-tight mb-2">
             {personalInfo.fullName}
           </h1>
@@ -123,11 +123,11 @@ export function ClassicATSTemplate({ data }: ClassicATSTemplateProps) {
 
         {/* Summary */}
         {personalInfo.summary && (
-          <section className="mb-5 print:break-inside-avoid">
+          <section className="mb-4 print:break-inside-avoid">
             <h2 className="text-sm font-bold uppercase tracking-wide border-b border-gray-300 pb-1 mb-2 text-gray-900">
               Summary
             </h2>
-            <p className="text-gray-800 leading-relaxed">
+            <p className="text-gray-800 leading-normal">
               {personalInfo.summary}
             </p>
           </section>
@@ -135,12 +135,12 @@ export function ClassicATSTemplate({ data }: ClassicATSTemplateProps) {
 
         {/* Experience */}
         {experience.length > 0 && (
-          <section className="mb-5">
-            <h2 className="text-sm font-bold uppercase tracking-wide border-b border-gray-300 pb-1 mb-3 text-gray-900">
+          <section className="mb-4">
+            <h2 className="text-sm font-bold uppercase tracking-wide border-b border-gray-300 pb-1 mb-2 text-gray-900">
               Experience
             </h2>
             {experience.map((exp) => (
-              <div key={exp.id} className="mb-4 print:break-inside-avoid">
+              <div key={exp.id} className="mb-3 print:break-inside-avoid">
                 <div className="flex justify-between items-baseline">
                   <h3 className="font-semibold text-gray-900">{exp.title}</h3>
                   <span className="text-xs text-gray-700 font-medium">
@@ -169,12 +169,12 @@ export function ClassicATSTemplate({ data }: ClassicATSTemplateProps) {
 
         {/* Education */}
         {education.length > 0 && (
-          <section className="mb-5">
-            <h2 className="text-sm font-bold uppercase tracking-wide border-b border-gray-300 pb-1 mb-3 text-gray-900">
+          <section className="mb-4">
+            <h2 className="text-sm font-bold uppercase tracking-wide border-b border-gray-300 pb-1 mb-2 text-gray-900">
               Education
             </h2>
             {education.map((edu) => (
-              <div key={edu.id} className="mb-3 print:break-inside-avoid">
+              <div key={edu.id} className="mb-2 print:break-inside-avoid">
                 <div className="flex justify-between items-baseline">
                   <h3 className="font-semibold text-gray-900">{edu.degree}</h3>
                   <span className="text-xs text-gray-700 font-medium">
@@ -207,7 +207,7 @@ export function ClassicATSTemplate({ data }: ClassicATSTemplateProps) {
 
         {/* Skills */}
         {skills.length > 0 && (
-          <section className="mb-5 print:break-inside-avoid">
+          <section className="mb-4 print:break-inside-avoid">
             <h2 className="text-sm font-bold uppercase tracking-wide border-b border-gray-300 pb-1 mb-2 text-gray-900">
               Skills
             </h2>
@@ -226,12 +226,12 @@ export function ClassicATSTemplate({ data }: ClassicATSTemplateProps) {
 
         {/* Projects */}
         {projects.length > 0 && (
-          <section className="mb-5">
-            <h2 className="text-sm font-bold uppercase tracking-wide border-b border-gray-300 pb-1 mb-3 text-gray-900">
+          <section className="mb-4">
+            <h2 className="text-sm font-bold uppercase tracking-wide border-b border-gray-300 pb-1 mb-2 text-gray-900">
               Projects
             </h2>
             {projects.map((project) => (
-              <div key={project.id} className="mb-3 print:break-inside-avoid">
+              <div key={project.id} className="mb-2 print:break-inside-avoid">
                 <div className="flex justify-between items-baseline">
                   <h3 className="font-semibold text-gray-900">
                     {project.name}
