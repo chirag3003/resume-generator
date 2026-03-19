@@ -10,6 +10,7 @@ export interface SavedResume {
     template: string;
     // Future: themeColor, font, etc.
   };
+  initialPrompt?: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -19,7 +20,7 @@ interface DashboardStore {
   activeResumeId: string | null;
 
   // Actions
-  createResume: (name: string) => string;
+  createResume: (name: string, initialPrompt?: string) => string;
   deleteResume: (id: string) => void;
   updateResume: (
     id: string,
@@ -59,7 +60,7 @@ export const useDashboardStore = create<DashboardStore>()(
       resumes: [],
       activeResumeId: null,
 
-      createResume: (name: string) => {
+      createResume: (name: string, initialPrompt?: string) => {
         const id = generateId();
         const now = new Date().toISOString();
         const newResume: SavedResume = {
@@ -69,6 +70,7 @@ export const useDashboardStore = create<DashboardStore>()(
           settings: {
             template: "classic",
           },
+          initialPrompt,
           createdAt: now,
           updatedAt: now,
         };

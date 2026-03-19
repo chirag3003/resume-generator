@@ -175,18 +175,31 @@ export async function chatEditResume({
   userMessage,
   history,
   settings,
+  context,
+  initialPrompt,
 }: {
   currentResume: ResumeData;
   userMessage: string;
   history: { role: string; content: string }[];
   settings: AISettings;
+  context?: { summary: string; skills: string; custom: string };
+  initialPrompt?: string;
 }): Promise<{ updatedResume: ResumeData | null; responseMessage: string }> {
+  let contextStr = "None";
+  if (context || initialPrompt) {
+    contextStr = `
+Global User Profile Context: ${context ? JSON.stringify(context) : "None"}
+Initial Target Job/Role Prompt: ${initialPrompt ? `"${initialPrompt}"` : "None"}
+    `.trim();
+  }
+
   const systemPrompt = CHAT_EDIT_PROMPT.replace(
     "{resumeData}",
     JSON.stringify(currentResume),
   )
     .replace("{userRequest}", userMessage)
-    .replace("{history}", JSON.stringify(history));
+    .replace("{history}", JSON.stringify(history))
+    .replace("{context}", contextStr);
 
   const response = await generateContent({
     prompt: "Process the request.",

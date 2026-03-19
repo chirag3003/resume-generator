@@ -134,6 +134,7 @@ Input:
 - Current Resume: {resumeData}
 - User Request: "{userRequest}"
 - Chat History: {history}
+- Overall Context: {context}
 
 Instructions:
 1. Return a JSON object containing:
@@ -142,7 +143,7 @@ Instructions:
 2. If the user's request is a question and not an edit, set "updatedResume" to null and "responseMessage" to your answer.
 3. If the request is ambiguous, ask for clarification in "responseMessage" and set "updatedResume" to null.
 4. Maintain the structure of the resume JSON exactly.
-5. Prioritize the user's specific instructions.
+5. Prioritize the user's specific instructions, using the "Overall Context" to fill in gaps if the user asks you to "expand", "tailor", or "generate" something without providing exact text.
 
 JSON Schema:
 {

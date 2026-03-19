@@ -4,11 +4,13 @@ import { Bot, Loader2, Send, Trash2, User } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { chatEditResume } from "@/lib/ai/aiService";
 import { useAISettingsStore } from "@/lib/store/useAISettingsStore";
 import { useChatStore } from "@/lib/store/useChatStore";
+import { useDashboardStore } from "@/lib/store/useDashboardStore";
 import { useResumeStore } from "@/lib/store/useResumeStore";
+import { useUserProfileStore } from "@/lib/store/useUserProfileStore";
 import { cn } from "@/lib/utils";
 
 const EMPTY_MESSAGES: any[] = []; // Typed as any[] or ChatMessage[] to avoid issues, better to infer or import type if needed but any[] is safe for empty. actually let's use the type from store if possible or just infer.
@@ -26,6 +28,10 @@ export function ChatPanel({ resumeId }: { resumeId: string }) {
 
   const { resumeData, setResumeData } = useResumeStore();
   const settings = useAISettingsStore();
+  const { resumes } = useDashboardStore();
+  const { context } = useUserProfileStore();
+
+  const activeSavedResume = resumes.find((r) => r.id === resumeId);
 
   // Auto-scroll to bottom
   // biome-ignore lint/correctness/useExhaustiveDependencies: <side effect>
@@ -73,6 +79,8 @@ export function ChatPanel({ resumeId }: { resumeId: string }) {
         userMessage: userMsg,
         history: historyForAI,
         settings,
+        context: context,
+        initialPrompt: activeSavedResume?.initialPrompt,
       });
 
       // Apply updates if any
@@ -192,19 +200,21 @@ export function ChatPanel({ resumeId }: { resumeId: string }) {
 
       {/* Input */}
       <div className="p-4 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
-        <div className="flex gap-2">
-          <Input
+        <div className="flex gap-2 items-end">
+          <Textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Ask me to edit your resume..."
             disabled={isLoading}
-            className="flex-1"
+            className="flex-1 min-h-[60px] max-h-[200px] resize-y py-3"
+            rows={2}
           />
           <Button
             onClick={handleSend}
             disabled={!input.trim() || isLoading}
             size="icon"
+            className="shrink-0 mb-1"
           >
             <Send className="h-4 w-4" />
           </Button>

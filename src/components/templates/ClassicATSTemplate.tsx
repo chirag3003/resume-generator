@@ -52,9 +52,8 @@ export function ClassicATSTemplate({ data }: ClassicATSTemplateProps) {
                   className="hover:text-blue-600 print:text-black"
                 >
                   {personalInfo.linkedin
-                    .replace("https://", "")
-                    .replace("http://", "")
-                    .replace("www.", "")}
+                    .replace(/^https?:\/\/(www\.)?/, "")
+                    .replace(/\/$/, "")}
                 </a>
               </>
             )}
@@ -72,9 +71,8 @@ export function ClassicATSTemplate({ data }: ClassicATSTemplateProps) {
                   className="hover:text-blue-600 print:text-black"
                 >
                   {personalInfo.github
-                    .replace("https://", "")
-                    .replace("http://", "")
-                    .replace("www.", "")}
+                    .replace(/^https?:\/\/(www\.)?/, "")
+                    .replace(/\/$/, "")}
                 </a>
               </>
             )}
@@ -92,9 +90,8 @@ export function ClassicATSTemplate({ data }: ClassicATSTemplateProps) {
                   className="hover:text-blue-600 print:text-black"
                 >
                   {personalInfo.portfolio
-                    .replace("https://", "")
-                    .replace("http://", "")
-                    .replace("www.", "")}
+                    .replace(/^https?:\/\/(www\.)?/, "")
+                    .replace(/\/$/, "")}
                 </a>
               </>
             )}
@@ -112,9 +109,8 @@ export function ClassicATSTemplate({ data }: ClassicATSTemplateProps) {
                   className="hover:text-blue-600 print:text-black"
                 >
                   {personalInfo.website
-                    .replace("https://", "")
-                    .replace("http://", "")
-                    .replace("www.", "")}
+                    .replace(/^https?:\/\/(www\.)?/, "")
+                    .replace(/\/$/, "")}
                 </a>
               </>
             )}

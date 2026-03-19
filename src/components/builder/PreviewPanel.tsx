@@ -145,23 +145,31 @@ export function PreviewPanel({ data }: PreviewPanelProps) {
       </div>
 
       {/* Preview area */}
-      <div className="flex-1 overflow-auto flex items-start justify-center p-3 sm:p-6 print:p-0 print:overflow-visible print:block">
+      <div className="flex-1 overflow-auto flex items-start justify-center p-4 sm:p-8 print:p-0 print:overflow-visible print:block bg-slate-200/50 dark:bg-slate-900/50">
         <div
-          id="resume-preview-container"
-          className="shadow-2xl origin-top print:shadow-none relative bg-white"
+          className="origin-top flex flex-col gap-6 print:gap-0"
           style={{
             transform: `scale(${scale})`,
           }}
         >
-          {/* Page boundary indicator for preview */}
           <div
-            className="absolute inset-0 pointer-events-none print:hidden z-50 mix-blend-multiply"
+            id="resume-preview-container"
+            className="shadow-xl bg-white print:shadow-none relative"
             style={{
-              backgroundImage:
-                "repeating-linear-gradient(to bottom, transparent, transparent calc(297mm - 1px), #ef4444 calc(297mm - 1px), #ef4444 297mm)",
+              width: "210mm",
+              minHeight: "297mm",
             }}
-          />
-          {renderTemplate()}
+          >
+            {/* Page boundary indicator for preview */}
+            <div
+              className="absolute inset-0 pointer-events-none print:hidden z-50 mix-blend-multiply"
+              style={{
+                backgroundImage:
+                  "repeating-linear-gradient(to bottom, transparent, transparent calc(297mm - 1px), #ef4444 calc(297mm - 1px), #ef4444 297mm)",
+              }}
+            />
+            {renderTemplate()}
+          </div>
         </div>
       </div>
     </div>

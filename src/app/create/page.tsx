@@ -99,7 +99,7 @@ export default function CreateResumePage() {
         profile,
       });
 
-      const id = createResume(name.trim());
+      const id = createResume(name.trim(), prompt.trim());
       updateResume(id, generatedData);
 
       toast.success("Resume generated successfully!");
