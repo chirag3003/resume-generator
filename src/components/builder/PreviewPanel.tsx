@@ -147,7 +147,8 @@ export function PreviewPanel({ data }: PreviewPanelProps) {
       {/* Preview area */}
       <div className="flex-1 overflow-auto flex items-start justify-center p-4 sm:p-8 print:p-0 print:overflow-visible print:block bg-slate-200/50 dark:bg-slate-900/50">
         <div
-          className="origin-top flex flex-col gap-6 print:gap-0"
+          id="resume-scale-wrapper"
+          className="origin-top flex flex-col gap-6 print:block print:gap-0"
           style={{
             transform: `scale(${scale})`,
           }}
@@ -162,12 +163,28 @@ export function PreviewPanel({ data }: PreviewPanelProps) {
           >
             {/* Page boundary indicator for preview */}
             <div
-              className="absolute inset-0 pointer-events-none print:hidden z-50 mix-blend-multiply"
+              className="absolute pointer-events-none print:hidden z-50 left-0 right-0 border-b-2 border-dashed border-red-500 flex items-center justify-center"
               style={{
-                backgroundImage:
-                  "repeating-linear-gradient(to bottom, transparent, transparent calc(297mm - 1px), #ef4444 calc(297mm - 1px), #ef4444 297mm)",
+                top: "297mm",
+                height: "1px",
               }}
-            />
+            >
+              <div className="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full absolute -top-3">
+                Page Break
+              </div>
+            </div>
+            {/* Second Page boundary indicator for preview */}
+            <div
+              className="absolute pointer-events-none print:hidden z-50 left-0 right-0 border-b-2 border-dashed border-red-500 flex items-center justify-center"
+              style={{
+                top: "594mm",
+                height: "1px",
+              }}
+            >
+              <div className="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full absolute -top-3">
+                Page Break
+              </div>
+            </div>
             {renderTemplate()}
           </div>
         </div>
